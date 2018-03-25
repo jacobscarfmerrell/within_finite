@@ -1,4 +1,4 @@
-[![Build Status](https://codeship.com/projects/48d1c9b0-1283-0136-6486-664beef0913d/status?branch=master)
+![Build Status](https://codeship.com/projects/48d1c9b0-1283-0136-6486-664beef0913d/status?branch=master)
 [![Code Climate](https://codeclimate.com/github/jacobscarfmerrell/within_finite/badges/gpa.svg)](https://codeclimate.com/github/jacobscarfmerrell/within_finite)
 [![Coverage Status](https://coveralls.io/repos/github/jacobscarfmerrell/within_finite/badge.svg?branch=master)](https://coveralls.io/github/jacobscarfmerrell/within_finite?branch=master)
 
