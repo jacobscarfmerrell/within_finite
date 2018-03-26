@@ -10,16 +10,22 @@ class SectionShowContainer extends Component {
   render() {
     let sectionTiles = this.props.sections.map(section => {
       return(
-        <SectionTile
-          key={section.id}
-          id={section.id}
-          name={section.name}
-          handleClick={this.props.handleClick}
-        />
+          <SectionTile
+            key={section.id}
+            id={section.id}
+            name={section.name}
+            handleClick={this.props.handleClick}
+          />
       )
     })
     return (
-      <div>{sectionTiles}</div>
+      <table className='section'>
+        <thead>
+          <tr>
+            {sectionTiles}
+          </tr>
+        </thead>
+      </table>
     )
   }
 }

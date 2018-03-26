@@ -12,8 +12,10 @@ class RhythmContainer extends Component {
       return(
         <RhythmTile
           key={rhythm.id}
+          id={rhythm.id}
           antecedent={rhythm.antecedent}
           consequent={rhythm.consequent}
+          handleClick={this.props.handleClick}
         />
       )
     })

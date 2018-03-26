@@ -2,15 +2,17 @@ import React from 'react';
 
 const RhythmTile = props => {
   let antecedent_row = [];
-  for (let i=0; i < props.antecedent; i++) {
-    antecedent_row.push(<th>{i+1}</th>);
+  for (let i=1; i <= props.antecedent; i++) {
+    antecedent_row.push(<th id={'a.'+i} key={i}>{i}</th>);
   }
   let consequent_row = [];
-  for (let i=0; i < props.consequent; i++) {
-    consequent_row.push(<th>{i+1}</th>);
+  for (let i=1; i <= props.consequent; i++) {
+    consequent_row.push(<th id={'c.'+i} key={i}>{i}</th>);
   }
   return(
-    <div>
+    <div onClick={props.handleClick} id={`${props.id}`}>
+      <hr className="divider divider-short"/>
+
       <table className={'rhythm rhythm-'+props.antecedent}>
         <thead>
           <tr>
@@ -18,7 +20,6 @@ const RhythmTile = props => {
           </tr>
         </thead>
       </table>
-
       <table className={'rhythm rhythm-'+props.consequent}>
         <thead>
           <tr>
@@ -26,6 +27,8 @@ const RhythmTile = props => {
           </tr>
         </thead>
       </table>
+
+      <hr className="divider divider-short"/>
     </div>
   )
 }
