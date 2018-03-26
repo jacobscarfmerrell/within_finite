@@ -1,2 +1,0 @@
-class SectionRhythmsController < ApplicationController
-end

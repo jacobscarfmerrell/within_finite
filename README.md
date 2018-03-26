@@ -9,7 +9,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby 2.3.3
 
 * System dependencies
 
@@ -26,4 +26,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-# within_finite
+# within:Finite
