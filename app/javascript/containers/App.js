@@ -1,90 +1,59 @@
 import React, { Component } from 'react';
 import RhythmContainer from './RhythmContainer';
-import SectionShowContainer from './SectionShowContainer';
+import SectionContainer from './SectionContainer';
+import ChordContainer from './ChordContainer';
+import NoteContainer from './NoteContainer';
 import { Link } from 'react-router';
-
+import { INIT_STATE } from '../constants/Constants'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      view: 'formRhythm',
-      sectionRhythms: [],
-      sections: [],
-      rhythms: [],
-      currentSection: 0,
-      currentRhythm: 0
+      view: 'unmounted',
+      currentSection: {},
+      currentRhythm: {},
+      currentChord: {},
+      currentNote: {},
+      app: {}
     }
-    this.handleSectionClick = this.handleSectionClick.bind(this);
-    this.handleRhythmClick = this.handleRhythmClick.bind(this);
   }
 
-  handleSectionClick(event) {
+  addRhythm() {
+    let currentRhythms = this.state.currentSection.rhythms
     this.setState({
-      currentSection: Number(event.target.id)
+
     });
   }
 
-  handleRhythmClick(event) {
-    if (this.state.view == 'formRhythm') {
-      this.setState({
-        view: 'rhythmChord',
-        currentRhythm: Number(event.currentTarget.id)
-      })
-    }
-  }
 
   componentDidMount() {
-    fetch('/api/v1/sections')
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-        error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      this.setState({
-        sections: body['sections'],
-        rhythms: body['rhythms'],
-        sectionRhythms: body['section_rhythms']
-      })
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    this.setState(INIT_STATE);
   }
 
   render() {
-    let { sections, sectionRhythms, rhythms, view} = this.state;
     let display;
+    let view = this.state.view;
+    console.log(this.state.app)
 
-    if (view == 'formRhythm') {
-      let selectedRhythmIds = [];
-      let selectedSectionIds = [];
-      for (let i=0; i<sectionRhythms.length; i++) {
-        if (this.state.currentSection == sectionRhythms[i].section_id) {
-          selectedRhythmIds.push(sectionRhythms[i].rhythm_id)
-        }
-        selectedSectionIds.push(sectionRhythms[i].section_id)
-      }
-      let selectedRhythms = rhythms.filter(rhythm => selectedRhythmIds.includes(rhythm.id));
-
-      display = <div><SectionShowContainer sections={sections} handleClick={this.handleSectionClick}
-      /><hr /><RhythmContainer rhythms={selectedRhythms} handleClick={this.handleRhythmClick} /></div>;
+    if (view == 'unmounted') {}
+    else if (view == 'sectionRhythm') {
+      display = <div>
+        <SectionContainer sections={this.state.app.sections}/><hr/>
+        <RhythmContainer rhythms={this.state.app.sections[0].rhythms}/>
+      </div>;
     }
     else if (view == 'rhythmChord') {
-      // selecting the right rhythm
-      let selectedRhythmId = this.state.currentRhythm;
-      let selectedRhythm = [];
-      for (let i=0; i<rhythms.length; i++) {
-        if (selectedRhythmId == rhythms[i].id) {
-          selectedRhythm.push(rhythms[i])
-        }
-      }
-
-      display = <div><RhythmContainer rhythms={selectedRhythm} handleClick={this.handleRhythmClick} /><hr/></div>;
+      display = <div>
+        <RhythmContainer /><hr/>
+        <ChordContainer />
+      </div>;
+    }
+    else if (view == 'chordNote') {
+      display = <div>
+        <ChordContainer /><hr/>
+        <NoteContainer />
+      </div>;
     }
 
     return (

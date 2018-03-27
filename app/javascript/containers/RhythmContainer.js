@@ -8,19 +8,15 @@ class RhythmContainer extends Component {
     }
   }
   render() {
-    let rhythmTiles = this.props.rhythms.map(rhythm => {
+    let rhythms = this.props.rhythms.map(rhythm => {
       return(
-        <RhythmTile
-          key={rhythm.id}
-          id={rhythm.id}
-          antecedent={rhythm.antecedent}
-          consequent={rhythm.consequent}
-          handleClick={this.props.handleClick}
-        />
+        <RhythmTile key={rhythm.id}/>
       )
     })
     return (
-      <div>{rhythmTiles}</div>
+      <div className='rhythm-table'>
+        {rhythms}
+      </div>
     )
   }
 }

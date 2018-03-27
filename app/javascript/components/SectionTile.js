@@ -2,9 +2,9 @@ import React from 'react';
 
 const SectionTile = props => {
   return(
-    <th onClick={props.handleClick} id={props.id}>
-      {props.name}
-    </th>
+    <td>
+      <p>a section tile goes here</p>
+    </td>
   )
 }
 

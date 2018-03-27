@@ -2,22 +2,46 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.rhythm {
-  border: 2px solid;
-  margin: 2px;
-  width: 80%;
-}
-
 .section {
   border: 2px solid;
   margin: 2px;
   width: 80%;
 }
 
-.divider {
-
+.rhythm {
+  border: 2px solid;
+  margin: 2px;
+  width: 80%;
 }
 
-.divider-short {
-  width: 50%;
+.rhythm-row {
+  width: 80%;
+  display: table;
+}
+
+.rhythm-table {
+  width: 80%;
+  display: table;
+}
+
+.step {
+  list-style: none;
+  display: table-cell;
+  border: 1px solid black;
+}
+
+.chord-tone {
+  list-style: none;
+  display: table-cell;
+  border: 1px solid black;
+}
+
+.chord-row {
+  width: 80%;
+  display: table-row;
+}
+
+.chord-table {
+  width: 80%;
+  display: table;
 }
