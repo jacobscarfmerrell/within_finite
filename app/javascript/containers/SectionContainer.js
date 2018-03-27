@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import SectionTile from '../components/SectionTile'
 
-class SectionShowContainer extends Component {
+class SectionContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
     }
   }
   render() {
-    let sectionTiles = this.props.sections.map(section => {
+    let sectionTiles = this.props.sections.map((section,index) => {
       return(
           <SectionTile
-            key={section.id}
-            id={section.id}
-            name={section.name}
+            key={index+1}
+            id={index+1}
+            name={String.fromCharCode(index+65)}
             handleClick={this.props.handleClick}
           />
       )
@@ -30,4 +30,4 @@ class SectionShowContainer extends Component {
   }
 }
 
-export default SectionShowContainer;
+export default SectionContainer;

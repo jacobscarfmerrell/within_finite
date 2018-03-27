@@ -14,10 +14,34 @@
   width: 80%;
 }
 
-.divider {
-
+.rhythm-row {
+  width: 80%;
+  display: table;
 }
 
-.divider-short {
-  width: 50%;
+.rhythm-table {
+  width: 80%;
+  display: table;
+}
+
+.step {
+  list-style: none;
+  display: table-cell;
+  border: 1px solid black;
+}
+
+.chord-tone {
+  list-style: none;
+  display: table-cell;
+  border: 1px solid black;
+}
+
+.chord-row {
+  width: 80%;
+  display: table-row;
+}
+
+.chord-table {
+  width: 80%;
+  display: table;
 }
