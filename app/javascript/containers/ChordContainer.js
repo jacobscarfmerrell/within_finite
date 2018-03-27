@@ -8,26 +8,9 @@ class ChordContainer extends Component {
     }
   }
   render() {
-    let chords;
-    if (this.props.chords) {
-      chords = this.props.chords;
-    }
-    else {
-      chords = [this.props.chord];
-    }
-    let chordTiles = chords.map((chord, index) => {
-      return(
-        <ChordTile
-          key={index+1}
-          id={index+1}
-          location={chord.chord.location}
-          handleClick={this.props.handleClick}
-        />
-      )
-    })
     return (
       <div>
-        {chordTiles}
+        <p>chord tiles go here</p>
       </div>
     )
   }

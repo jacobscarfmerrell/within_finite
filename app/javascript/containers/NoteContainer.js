@@ -9,7 +9,7 @@ class NoteContainer extends Component {
   }
   render() {
     return (
-      <NoteTile />
+      <p>note tiles go here</p>
     )
   }
 }
