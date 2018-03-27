@@ -1,15 +1,6 @@
-import {rhythm} from '../helpers/Helpers';
-
-const SECTION = {
-  rhythms: [rhythm(2)]
-}
-
-const APP = {
-  sections: [
-    Object.assign({}, SECTION)
-  ]
-}
+import {app} from '../helpers/Helpers';
 
 export const INIT_STATE = {
-  app: APP
+  app: app(1),
+  view: 'sectionRhythm'
 };

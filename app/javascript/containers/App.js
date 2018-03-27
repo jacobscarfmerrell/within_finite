@@ -10,11 +10,12 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      view: 'sectionRhythm',
+      view: 'unmounted',
       currentSection: {},
       currentRhythm: {},
       currentChord: {},
-      currentNote: {}
+      currentNote: {},
+      app: {}
     }
   }
 
@@ -31,14 +32,15 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.app)
     let display;
     let view = this.state.view;
+    console.log(this.state.app)
 
-    if (view == 'sectionRhythm') {
+    if (view == 'unmounted') {}
+    else if (view == 'sectionRhythm') {
       display = <div>
-        <SectionContainer /><hr/>
-        <RhythmContainer />
+        <SectionContainer sections={this.state.app.sections}/><hr/>
+        <RhythmContainer rhythms={this.state.app.sections[0].rhythms}/>
       </div>;
     }
     else if (view == 'rhythmChord') {

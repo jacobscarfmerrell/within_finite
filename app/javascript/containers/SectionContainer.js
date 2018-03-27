@@ -8,13 +8,18 @@ class SectionContainer extends Component {
     }
   }
   render() {
+    let sections = this.props.sections.map(section => {
+      return(
+        <SectionTile key={section.id}/>
+      )
+    })
     return (
       <table className='section'>
-        <thead>
+        <tbody>
           <tr>
-            <td>section tiles go here</td>
+            {sections}
           </tr>
-        </thead>
+        </tbody>
       </table>
     )
   }
