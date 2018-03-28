@@ -6,17 +6,21 @@
     "yarn": ">=0.25.2"
   },
   "dependencies": {
+    "@material/button": "^0.33.0",
+    "@material/ripple": "^0.33.0",
     "@rails/webpacker": "~3.3.0",
     "babel-preset-react": "~6.24.1",
+    "npm": "^5.8.0",
     "prop-types": "~15.6.0",
     "react": "~15.4.2",
     "react-dom": "~15.4.2",
     "react-router": "~3.2.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "^2.11.1",
-    "webpack-cli": "^2.0.10",
+    "css-loader": "^0.28.11",
     "enzyme": "~2.9.1",
+    "extract-loader": "^2.0.1",
+    "file-loader": "^1.1.11",
     "jasmine-ajax": "3.2.0",
     "jasmine-core": "~2.4.1",
     "jasmine-enzyme": "~3.4.0",
@@ -27,8 +31,13 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-spec-reporter": "0.0.26",
     "karma-webpack": "2.0.1",
+    "node-sass": "^4.8.3",
     "phantomjs-prebuilt": "~2.1.14",
-    "react-addons-test-utils": "~15.6.2"
+    "react-addons-test-utils": "~15.6.2",
+    "sass-loader": "^6.0.7",
+    "webpack": "^3.11.0",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^2.11.2"
   },
   "scripts": {
     "start": "./bin/webpack-dev-server",

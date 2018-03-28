@@ -4,11 +4,11 @@ import SectionContainer from './SectionContainer';
 import ChordContainer from './ChordContainer';
 import NoteContainer from './NoteContainer';
 import { Link } from 'react-router';
-import { INIT_STATE } from '../constants/Constants'
+import { INIT_STATE } from '../constants/Constants';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       view: 'unmounted',
       currentSection: {},
@@ -16,16 +16,8 @@ class App extends Component {
       currentChord: {},
       currentNote: {},
       app: {}
-    }
+    };
   }
-
-  addRhythm() {
-    let currentRhythms = this.state.currentSection.rhythms
-    this.setState({
-
-    });
-  }
-
 
   componentDidMount() {
     this.setState(INIT_STATE);
@@ -34,7 +26,7 @@ class App extends Component {
   render() {
     let display;
     let view = this.state.view;
-    console.log(this.state.app)
+    console.log(this.state.app);
 
     if (view == 'unmounted') {}
     else if (view == 'sectionRhythm') {
