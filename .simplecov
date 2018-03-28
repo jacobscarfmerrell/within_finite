@@ -14,4 +14,6 @@ SimpleCov.start do
   add_filter 'app/controllers/users/unlocks_controller.rb'
   add_filter 'app/controllers/users/confirmations_controller.rb'
   add_filter 'app/controllers/users/passwords_controller.rb'
+  add_filter 'app/controllers/application_controller.rb'
+  add_filter 'app/controllers/homes_controller.rb'
 end
