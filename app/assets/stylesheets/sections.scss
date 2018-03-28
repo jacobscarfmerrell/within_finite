@@ -9,21 +9,20 @@
   @include mdc-states(teal);
 }
 
-.section {
-  border: 2px solid;
-  margin: 2px;
-  width: 80%;
+.selected {
+  font-weight: bold;
 }
 
-.rhythm {
-  border: 2px solid;
-  margin: 2px;
-  width: 80%;
+.section-container {
+  border: none;
 }
 
-.rhythm-row {
+.section-tile {
+  padding: 0.2em;
+  border: 2px solid;
+  border-radius: 3px;
+  margin: 2px;
   width: 80%;
-  display: table;
 }
 
 .rhythm-table {
@@ -31,16 +30,20 @@
   display: table;
 }
 
-.step {
+.rhythm-row {
+  width: 80%;
+  display: table-row;
+}
+
+.rhythm-tile {
   list-style: none;
   display: table-cell;
   border: 1px solid black;
 }
 
-.chord-tone {
-  list-style: none;
-  display: table-cell;
-  border: 1px solid black;
+.chord-table {
+  width: 80%;
+  display: table;
 }
 
 .chord-row {
@@ -48,7 +51,8 @@
   display: table-row;
 }
 
-.chord-table {
-  width: 80%;
-  display: table;
+.chord-tile {
+  list-style: none;
+  display: table-cell;
+  border: 1px solid black;
 }

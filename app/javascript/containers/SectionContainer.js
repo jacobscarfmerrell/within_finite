@@ -9,12 +9,22 @@ class SectionContainer extends Component {
   }
   render() {
     let sections = this.props.sections.map(section => {
+      let className = 'section-tile ';
+      if (this.props.selectedSection.id == section.id) {
+        className += 'selected';
+      }
       return(
-        <SectionTile key={section.id}/>
+        <SectionTile
+          key={section.id}
+          id={section.id}
+          name={String.fromCharCode(section.id+64)}
+          handleClick={this.props.handleClick}
+          className={className}
+        />
       )
     })
     return (
-      <table className='section'>
+      <table className='section-container'>
         <tbody>
           <tr>
             {sections}

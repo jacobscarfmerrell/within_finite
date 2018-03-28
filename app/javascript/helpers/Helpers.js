@@ -1,7 +1,8 @@
+const tones = ['=R','-2','+2','-3','+3','-4','=T','+5','-6','+6','-7','+7'];
 function note(fundamental) {
   return (
     { volume: 0.0,
-      id: fundamental,
+      id: tones[fundamental-1],
       fundamental: fundamental,
       harmonics: [
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
@@ -43,7 +44,7 @@ function rhythm(divisor, id) {
 function section(numRhythms, id) {
   let rhythmList = [];
   for (let i=1; i<=numRhythms; i++) {
-    rhythmList.push(rhythm(2, i))
+    rhythmList.push(rhythm(4, i))
   }
   return (
     {
