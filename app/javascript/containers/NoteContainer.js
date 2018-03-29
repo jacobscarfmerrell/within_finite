@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import NoteTile from '../components/NoteTile'
+import React, { Component } from 'react';
+import NoteTile from '../components/NoteTile';
 
 class NoteContainer extends Component {
   constructor(props) {
@@ -9,7 +9,9 @@ class NoteContainer extends Component {
   }
   render() {
     return (
-      <p>note tiles go here</p>
+      <ul>
+        <NoteTile />
+      </ul>
     )
   }
 }

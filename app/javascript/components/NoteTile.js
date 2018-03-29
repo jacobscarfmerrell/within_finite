@@ -3,7 +3,7 @@ import React from 'react';
 const NoteTile = props => {
   return(
     <div>
-      <p>booya</p>
+      <p>note tile goes here</p>
     </div>
   )
 }
