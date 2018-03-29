@@ -9,9 +9,7 @@ class NoteContainer extends Component {
   }
   render() {
     return (
-      <ul>
-        <NoteTile />
-      </ul>
+      <NoteTile selectedNote={this.props.selectedNote}/>
     )
   }
 }

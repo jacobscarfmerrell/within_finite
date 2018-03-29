@@ -58,7 +58,7 @@ class App extends Component {
     Object.getOwnPropertyNames(this.state.selectedSection).length === 0) {
       this.setState({
         selectedSection: this.state.app.sections[Number(e.target.id)-1]
-      })
+      });
     }
     else if (this.state.view=='sectionRhythm') {
       let splitId = e.target.id.split('-');
@@ -105,12 +105,13 @@ class App extends Component {
     if (view == 'unmounted') {}
     else if (view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) {
       display = <div>
-      <h3>Sections</h3>
-        <SectionContainer
-          sections={app.sections}
-          selectedSection={selectedSection}
-          handleClick={this.handleDescend}
-        /><hr/>
+        <h3>Sections</h3>
+          <SectionContainer
+            sections={app.sections}
+            selectedSection={selectedSection}
+            handleClick={this.handleDescend}
+          />
+        <hr/>
       </div>;
     }
     else if (view == 'sectionRhythm') {
@@ -134,7 +135,7 @@ class App extends Component {
     else if (view == 'rhythmChord' && Object.getOwnPropertyNames(selectedRhythm).length === 0) {
       display = <div>
         <AscendButton handleClick={this.handleAscend} />
-        <h3>Rhythm</h3>
+        <h3>Rhythms</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
@@ -148,7 +149,7 @@ class App extends Component {
       console.log(selectedNote);
       display = <div>
         <AscendButton handleClick={this.handleAscend} />
-        <h3>Rhythm</h3>
+        <h3>Rhythms</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
@@ -164,7 +165,7 @@ class App extends Component {
         />
       </div>;
     }
-    else if (view == 'chordNote' && Object.getOwnPropertyNames(selectedChord).length === 0) {
+    else if (view == 'chordNote' && Object.getOwnPropertyNames(selectedNote).length === 0) {
       display = <div>
         <AscendButton handleClick={this.handleAscend} />
         <h3>Chord</h3>
@@ -188,8 +189,8 @@ class App extends Component {
           handleClick={this.handleDescend}
         />
         <hr/>
+        <h3>Note</h3>
         <NoteContainer
-          notes={selectedChord.notes}
           selectedNote={selectedNote}
         />
       </div>;
