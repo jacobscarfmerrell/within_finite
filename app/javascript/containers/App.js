@@ -6,6 +6,7 @@ import NoteContainer from './NoteContainer';
 import { Link } from 'react-router';
 import { INIT_STATE } from '../constants/Constants';
 import AscendButton from '../components/AscendButton';
+import ToneSandBox from './ToneSandBox';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
       selectedRhythm: {},
       selectedChord: {},
       selectedNote: {},
+      tempo: 60,
       app: {}
     };
     this.handleAscend = this.handleAscend.bind(this);
@@ -100,7 +102,7 @@ class App extends Component {
   render() {
     let display;
     let {view, selectedSection, selectedRhythm, selectedChord, selectedNote, app} = this.state;
-    console.log('app',app);
+    // console.log('app',app);
 
     if (view == 'unmounted') {}
     else if (view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) {
@@ -195,9 +197,10 @@ class App extends Component {
         />
       </div>;
     }
+    // add {display} back to div below
     return (
       <div>
-        {display}
+        <ToneSandBox app={this.state.app} tempo={this.state.tempo}/>
       </div>
     )
   }

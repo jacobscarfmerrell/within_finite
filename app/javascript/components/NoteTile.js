@@ -1,4 +1,5 @@
 import React from 'react';
+import Tone from 'tone';
 
 const NoteTile = props => {
   let note = props.selectedNote;
@@ -11,6 +12,7 @@ const NoteTile = props => {
       <li key={frequency}>F: {frequency}, A: {harmonicAmplitude}</li>
     )
   });
+
   return(
     <div>
       {harmonics}
