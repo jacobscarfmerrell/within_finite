@@ -15,9 +15,9 @@ class ToneSandBox extends Component {
     this.setupRhythms = this.setupRhythms.bind(this);
   }
 
-  setupRhythm() {
-    let chordsInRhythm = this.state.currentSection.rhythms[0].chords;
-    let chord = chordsInRhythm[0];
+  setupRhythm(rhythmIndex) {
+    let chordsInRhythm = this.state.currentSection.rhythms[rhythmIndex].chords;
+    let chord = chordsInRhythm[rhythmIndex];
 
     let synths = [];
     for (let i=0; i<chordsInRhythm.length; i++) {
@@ -40,7 +40,7 @@ class ToneSandBox extends Component {
     let subdivFormatted = `${subdiv}n`;
     let lengthFormatted = `${length}n`;
 
-    // transpose one note of first beat to check sequencing
+    // I transpose one note on the first beat to check that it sequences all chords in rhythm
     chordsInRhythm[0].notes2[0].transpose(1);
 
     chordsInRhythm = chordsInRhythm.map(chord => {
@@ -68,6 +68,7 @@ class ToneSandBox extends Component {
   }
 
   setupRhythms() {
+    // I still need to double check that two rhythms play simultaneously when the rhythms are different
     for (let i=0; i<this.state.currentSection.rhythms.length; i++) {
       this.setupRhythm(i);
     }
@@ -75,7 +76,7 @@ class ToneSandBox extends Component {
 
   componentDidMount() {
     Tone.Transport.bpm.value = this.state.tempo;
-    this.setupRhythm();
+    this.setupRhythms();
   }
 
   loopToggle(e) {
