@@ -99,6 +99,11 @@ class App extends Component {
     this.setState(INIT_STATE);
   }
 
+  // delete when ToneSandBox is removed
+  componentWillMount() {
+    this.setState(INIT_STATE);
+  }
+
   render() {
     let display;
     let {view, selectedSection, selectedRhythm, selectedChord, selectedNote, app} = this.state;
@@ -197,10 +202,12 @@ class App extends Component {
         />
       </div>;
     }
-    // add {display} back to div below
+    else if (view == 'sandbox') {
+      display = <ToneSandBox app={this.state.app} tempo={this.state.tempo}/>
+    }
     return (
       <div>
-        <ToneSandBox app={this.state.app} tempo={this.state.tempo}/>
+        {display}
       </div>
     )
   }

@@ -5,26 +5,39 @@ class ToneSandBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tempo: this.props.tempo
+      tempo: this.props.tempo,
+      app: this.props.app
     }
     this.loopToggle = this.loopToggle.bind(this);
     this.onTempoChange = this.onTempoChange.bind(this);
 
   }
 
+  playNote() {
+    let synth = new Tone.PolySynth(16,Tone.Synth).toMaster()
+    synth.set({
+      "oscillator" : {
+        "type" : 'sine'
+      },
+      "filter" : {
+        "Q" : 0
+      }
+    });
+    this.setState({
+      synth: synth
+    });
+  }
+
   componentDidMount() {
     Tone.Transport.bpm.value = this.state.tempo;
-    let synth = new Tone.PolySynth(2,Tone.MonoSynth).toMaster()
-    for (let i=0; i < synth.voices.length; i++) {
-      synth.voices[i].oscillator.type = 'sine'
-      // the below Q will not go away, just awful
-      synth.voices[i].filter.Q.value = 0
-    };
-    let seq = new Tone.Sequence(function(time, note) {
-      synth.triggerAttackRelease(note,'16n',time)
-    }, ["C3","E3","G3","B3"], "16n");
+
+    let rootNote = Tone.Frequency('C3')
+    let intervals = [0,4,7];
+    let chordFreqs = rootNote.harmonize(intervals);
+    console.log(chordFreqs[0]);
+    let seq = new Tone.Sequence(this.playNote,chordFreqs)
+
     this.setState({
-      synth: synth,
       seq: seq
     });
   }
