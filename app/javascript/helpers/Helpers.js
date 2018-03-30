@@ -1,3 +1,5 @@
+import Tone from 'tone';
+
 const tones = ['=R','-2','+2','-3','+3','-4','=T','+5','-6','+6','-7','+7'];
 function note(fundamental) {
   return (
@@ -20,10 +22,31 @@ function notes(num) {
 }
 
 function chord(id) {
+  let partials;
+  if (id%2 == 0) {
+    partials = [
+      1.0, 0.5, 0.2, 0.0,
+      0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0,
+      0.0, 0.0, 0.0, 0.0
+    ]
+  }
+  else {
+    partials = [
+      0.5, 0.4, 0.2, 0.4,
+      0.0, 0.0, 0.3 , 0.0,
+      0.0, 0.0, 0.0, 0.0,
+      0.0, 0.2, 0.3, 0.5
+    ]
+  }
   return(
     {
       id: id,
-      notes: notes(12)
+      notes: notes(12),
+      root: Tone.Frequency('A3'),
+      synth: new Tone.PolySynth(8, Tone.Synth).toMaster(),
+      notes2: [Tone.Frequency('A3'),Tone.Frequency('C4'),Tone.Frequency('E4'),Tone.Frequency('G4')],
+      partials: partials
     }
   )
 }
