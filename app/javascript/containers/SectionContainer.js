@@ -20,6 +20,7 @@ class SectionContainer extends Component {
           name={String.fromCharCode(section.id+64)}
           handleClick={this.props.handleClick}
           className={className}
+          deleteHandler={this.props.deleteHandler}
         />
       )
     })
@@ -27,6 +28,10 @@ class SectionContainer extends Component {
       <table className='section-container'>
         <tbody>
           <tr>
+            {
+              this.props.createHandler &&
+              <td onClick={this.props.createHandler}>+</td>
+            }
             {sections}
           </tr>
         </tbody>

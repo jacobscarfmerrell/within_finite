@@ -1,6 +1,6 @@
-import {app} from '../helpers/Helpers';
+import {seedApp} from '../helpers/Helpers';
 
 export const INIT_STATE = {
-  app: app(2),
-  view: 'sandbox'
+  app: seedApp(),
+  view: 'sectionRhythm'
 };

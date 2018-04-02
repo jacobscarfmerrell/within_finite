@@ -95,6 +95,7 @@ class ToneSandBox extends Component {
   }
 
   render() {
+    console.log()
     return (
       <div>
         <input type="checkbox" onChange={this.loopToggle} />

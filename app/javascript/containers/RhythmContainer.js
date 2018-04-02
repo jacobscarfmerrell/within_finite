@@ -7,6 +7,7 @@ class RhythmContainer extends Component {
     this.state = {
     }
   }
+
   render() {
     let rhythms = this.props.rhythms.map(rhythm => {
       let className = 'rhythm-tile '
@@ -23,11 +24,23 @@ class RhythmContainer extends Component {
           className={className}
           divisor={rhythm.chords.length}
           selectedChordId={this.props.selectedChordId}
+          deleteHandler={this.props.deleteHandler}
         />
       )
     })
     return (
       <ul className='rhythm-table'>
+        {
+          this.props.createHandler &&
+          <form onSubmit={this.props.createHandler}>
+            <input
+              type="number"
+              onClick={this.subdivValidator} />
+            <input
+              type="submit"
+            />
+          </form>
+        }
         {rhythms}
       </ul>
     )

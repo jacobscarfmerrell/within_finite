@@ -21,7 +21,7 @@ function notes(num) {
   return notes;
 }
 
-function chord(id) {
+function seedChord(id) {
   let partials;
   if (id%2 == 0) {
     partials = [
@@ -51,40 +51,50 @@ function chord(id) {
   )
 }
 
-function rhythm(divisor, id) {
-  let steps = [];
-  for (let i=1; i<=divisor; i++) {
-    steps.push(chord(i))
+export function buildRhythm(lastRhythmId, length) {
+  let chordList = [];
+  for (let i=0; i<length; i++) {
+    chordList.push(seedChord(i+1))
   }
   return (
     {
-      id: id,
-      chords: steps
+      id: lastRhythmId + 1,
+      chords: chordList
     }
   )
 }
 
-function section(numRhythms, id) {
-  let rhythmList = [];
-  for (let i=1; i<=numRhythms; i++) {
-    rhythmList.push(rhythm(4, i))
-  }
+function seedRhythm() {
   return (
     {
-      id: id,
-      rhythms: rhythmList
+      id: 1,
+      chords: [seedChord(1),seedChord(2)]
     }
   )
 }
 
-export function app(numSections) {
-  let sectionList = [];
-  for (let i=1; i<=numSections; i++) {
-    sectionList.push(section(2, i))
-  }
+export function buildSection(lastSectionId) {
   return (
     {
-      sections: sectionList
+      id: lastSectionId + 1,
+      rhythms: [seedRhythm()]
+    }
+  )
+}
+
+function seedSection() {
+  return (
+    {
+      id: 1,
+      rhythms: [seedRhythm()]
+    }
+  )
+}
+
+export function seedApp() {
+  return (
+    {
+      sections: [seedSection()]
     }
   )
 }
