@@ -17,11 +17,9 @@ class ToneSandBox extends Component {
 
   setupRhythm(rhythmIndex) {
     let chordsInRhythm = this.state.currentSection.rhythms[rhythmIndex].chords;
-    let chord = chordsInRhythm[rhythmIndex];
 
     let synths = [];
     for (let i=0; i<chordsInRhythm.length; i++) {
-
       chordsInRhythm[i].synth.set({
         "oscillator" : {
           "type" : 'sine',
@@ -36,17 +34,16 @@ class ToneSandBox extends Component {
 
     let subdiv = chordsInRhythm.length;
     let length = subdiv;
-    // this formatting only works with even divisions presently
+    // this formatting only works with even divisions presently?
     let subdivFormatted = `${subdiv}n`;
     let lengthFormatted = `${length}n`;
 
-    // I transpose one note on the first beat to check that it sequences all chords in rhythm
-    chordsInRhythm[0].notes2[0].transpose(1);
 
     chordsInRhythm = chordsInRhythm.map(chord => {
       return(
         new Tone.Event(function(time, chord){
-        }, [chord.notes2])
+        }, chord.root.harmonize(chord.intervals))
+        // harmonize() needed npm install tone@next to work
       )
     })
 
@@ -95,7 +92,6 @@ class ToneSandBox extends Component {
   }
 
   render() {
-    console.log()
     return (
       <div>
         <input type="checkbox" onChange={this.loopToggle} />

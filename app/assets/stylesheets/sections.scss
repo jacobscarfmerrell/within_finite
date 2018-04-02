@@ -41,18 +41,18 @@
   border: 1px solid black;
 }
 
-.chord-table {
-  width: 80%;
-  display: table;
-}
-
-.chord-row {
-  width: 80%;
-  display: table-row;
-}
-
-.chord-tile {
+.note-checkbox {
   list-style: none;
-  display: table-cell;
+  border: 1px solid black;
+  padding: 2px;
+}
+
+.note-container {
+  list-style: none;
+  display: inline-flex;
+}
+
+.note-cell {
+  list-style: none;
   border: 1px solid black;
 }

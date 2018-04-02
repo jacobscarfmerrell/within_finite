@@ -17,7 +17,7 @@ class App extends Component {
       selectedSection: {},
       selectedRhythm: {},
       selectedChord: {},
-      selectedNote: {},
+      selectedNotes: [],
       tempo: 60,
       app: {}
     };
@@ -27,7 +27,7 @@ class App extends Component {
     this.deleteSection = this.deleteSection.bind(this);
     this.createRhythm = this.createRhythm.bind(this);
     this.deleteRhythm = this.deleteRhythm.bind(this);
-    this.chordSelect = this.chordSelect.bind(this);
+    this.changeTimbreHandler = this.changeTimbreHandler.bind(this);
   }
 
   createSection() {
@@ -102,8 +102,10 @@ class App extends Component {
     });
   }
 
-  chordSelect(e) {
-    // FILL IN; MAY NEED HELPER
+  changeTimbreHandler(e) {
+    // should this be affecting app instead of selectedChord? when save?
+    let app = this.state.app;
+    this.state.selectedChord.partials[e.target.id] = e.target.value;
   }
 
   handleAscend(e) {
@@ -124,15 +126,9 @@ class App extends Component {
         selectedRhythm: {}
       });
     }
-    else if (this.state.view == 'chordNote' &&
-    Object.getOwnPropertyNames(this.state.selectedNote).length === 0) {
-      this.setState({
-        view: 'rhythmChord'
-      });
-    }
     else if (this.state.view == 'chordNote') {
       this.setState({
-        selectedNote: {}
+        view: 'rhythmChord'
       });
     }
   }
@@ -161,18 +157,28 @@ class App extends Component {
       });
     }
     else if (this.state.view == 'rhythmChord') {
-      let splitId = e.target.id.split('-');
+      e.preventDefault();
+      let intervals = [];
+      for (let i=0; i<e.target.length; i++) {
+        if (e.target[i].checked) {
+          intervals.push(e.target[i].id);
+        }
+      }
+      let app = this.state.app;
+      let sectionId = this.state.selectedSection.id;
+      let rhythmId = this.state.selectedRhythm.id;
+      let chordId = this.state.selectedChord.id;
+      app.sections[sectionId-1].rhythms[rhythmId-1].chords[chordId-1].intervals = intervals;
       this.setState({
-        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1],
-        selectedNote: this.state.selectedRhythm.chords[Number(splitId[0])-1].notes[Number(splitId[1])-1],
+        app: app,
+        selectedNotes: intervals,
         view: 'chordNote'
       });
     }
     else if (this.state.view == 'chordNote' && Object.getOwnPropertyNames(this.state.selectedNote).length === 0) {
       let splitId = e.target.id.split('-');
       this.setState({
-        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1],
-        selectedNote: this.state.selectedRhythm.chords[Number(splitId[0])-1].notes[Number(splitId[1])-1]
+        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1]
       });
     }
   }
@@ -188,7 +194,7 @@ class App extends Component {
 
   render() {
     let display;
-    let {view, selectedSection, selectedRhythm, selectedChord, selectedNote, app} = this.state;
+    let {view, selectedSection, selectedRhythm, selectedChord, selectedNotes, app} = this.state;
     // console.log('app',app);
 
     if (view == 'unmounted') {}
@@ -228,7 +234,7 @@ class App extends Component {
     else if (view == 'rhythmChord' && Object.getOwnPropertyNames(selectedRhythm).length === 0) {
       display = <div>
         <AscendButton handleClick={this.handleAscend} />
-        <h3>Select Rhythmic Step</h3>
+        <h3>Select Step</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
@@ -239,7 +245,6 @@ class App extends Component {
       </div>;
     }
     else if (view == 'rhythmChord') {
-      // console.log(selectedNote);
       display = <div>
         <AscendButton handleClick={this.handleAscend} />
         <h3>Selected Step</h3>
@@ -253,22 +258,8 @@ class App extends Component {
         <ChordContainer
           chords={selectedRhythm.chords}
           selectedChord={selectedChord}
-          selectedNoteId={selectedNote.fundamental}
-          handleClick={this.handleChordSelect}
+          handleDescend={this.handleDescend}
         />
-      </div>;
-    }
-    else if (view == 'chordNote' && Object.getOwnPropertyNames(selectedNote).length === 0) {
-      display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Chord</h3>
-        <ChordContainer
-          chords={selectedRhythm.chords}
-          selectedChord={selectedChord}
-          selectedNoteId={selectedNote.fundamental}
-          handleClick={this.handleDescend}
-        />
-        <hr/>
       </div>;
     }
     else if (view == 'chordNote') {
@@ -278,13 +269,14 @@ class App extends Component {
         <ChordContainer
           chords={selectedRhythm.chords}
           selectedChord={selectedChord}
-          selectedNoteId={selectedNote.fundamental}
           handleClick={this.handleDescend}
+          intervals={selectedNotes}
         />
         <hr/>
         <h3>Note</h3>
         <NoteContainer
-          selectedNote={selectedNote}
+          selectedChord={selectedChord}
+          handleChange={this.changeTimbreHandler}
         />
       </div>;
     }

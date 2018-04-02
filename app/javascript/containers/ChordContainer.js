@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ChordForm from '../components/ChordForm'
 import ChordTile from '../components/ChordTile'
 
 class ChordContainer extends Component {
@@ -8,28 +9,17 @@ class ChordContainer extends Component {
     }
   }
   render() {
-    let chords = this.props.chords;
-    if (Object.getOwnPropertyNames(this.props.selectedChord).length != 0) {
-      chords = [this.props.selectedChord];
-    }
-    let chordList = chords.map(chord => {
-      let className = 'chord-tile '
-      if (Object.getOwnPropertyNames(this.props.selectedChord).length != 0) {
-        if (this.props.selectedChord.id == chord.id) {
-          className = 'chord-selected ' + className
-        }
-      }
-      return(
+    let chord = this.props.selectedChord;
+    let chordList =
         <ChordTile
           key={chord.id}
           id={chord.id}
-          className={className}
-          handleClick={this.props.handleClick}
-          notes={chord.notes}
-          selectedNoteId={this.props.selectedNoteId}
+          intervals={this.props.intervals}
         />
-      )
-    })
+
+    if (this.props.intervals == undefined) {
+      chordList = <ChordForm handleDescend={this.props.handleDescend} selectedChord={this.props.selectedChord}/>
+    }
     return (
       <div className='chord-table'>
         {chordList}
