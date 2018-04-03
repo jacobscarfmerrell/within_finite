@@ -31,18 +31,16 @@ class App extends Component {
   }
 
   createSection() {
-    let app = this.state.app;
+    let app = Object.assign({},this.state.app);
     let oldSections = this.state.app.sections;
     let newSection = buildSection(oldSections[oldSections.length-1].id);
     app.sections.push(newSection);
-    this.setState({
-      app: app
-    });
+    this.setState({ app });
   }
 
   deleteSection(e) {
     let index = 0
-    let newSections = this.state.app.sections;
+    let newSections = Object.assign([],this.state.app.sections);
     for (let i = 0; i < newSections.length; i++) {
         if (newSections[i].id === Number(e.target.id)) {
           index = i;
@@ -51,11 +49,9 @@ class App extends Component {
         }
     }
     newSections.splice(index,1);
-    let app = this.state.app;
+    let app = Object.assign({},this.state.app);
     app.sections = newSections;
-    this.setState({
-      app: app
-    });
+    this.setState({ app });
   }
 
   createRhythm(e) {
@@ -64,23 +60,21 @@ class App extends Component {
     let rhythms = this.state.selectedSection.rhythms;
     let newRhythm = buildRhythm(rhythms[rhythms.length-1].id,Number(e.target[0].value));
 
-    let app = this.state.app;
+    let app = Object.assign({},this.state.app);
     for (let i = 0; i < app.sections.length; i++) {
         if (app.sections[i].id === currentSectionId) {
           app.sections[i].rhythms.push(newRhythm);
         }
     }
-    this.setState({
-      app: app
-    });
+    this.setState({ app });
   }
 
   deleteRhythm(e) {
     let currentSectionId = this.state.selectedSection.id;
-    let rhythms = this.state.selectedSection.rhythms;
+    let rhythms = Object.assign({},this.state.selectedSection.rhythms);
 
     let index = 0;
-    let app = this.state.app;
+    let app = Object.assign({},this.state.app);
     for (let i = 0; i < rhythms.length; i++) {
       if (rhythms[i].id === Number(e.target.id)) {
         index = i;
@@ -97,15 +91,16 @@ class App extends Component {
         }
     }
     app.sections[sectionIndex].rhythms.splice(index,1);
-    this.setState({
-      app: app
-    });
+    this.setState({ app });
   }
 
   changeTimbreHandler(e) {
-    // should this be affecting app instead of selectedChord? when save?
-    let app = this.state.app;
-    this.state.selectedChord.partials[e.target.id] = e.target.value;
+    let app = Object.assign({},this.state.app);
+    let currentSectionId = this.state.selectedSection.id;
+    let currentRhythmId = this.state.selectedRhythm.id;
+    let currentChordId = this.state.selectedChord.id;
+    app.sections[currentSectionId-1].rhythms[currentRhythmId-1].chords[currentChordId-1].partials[e.target.id] = Number(e.target.value);
+    this.setState({ app });
   }
 
   handleAscend(e) {
@@ -161,10 +156,10 @@ class App extends Component {
       let intervals = [];
       for (let i=0; i<e.target.length; i++) {
         if (e.target[i].checked) {
-          intervals.push(e.target[i].id);
+          intervals.push(Number(e.target[i].id));
         }
       }
-      let app = this.state.app;
+      let app = Object.assign({},this.state.app);
       let sectionId = this.state.selectedSection.id;
       let rhythmId = this.state.selectedRhythm.id;
       let chordId = this.state.selectedChord.id;

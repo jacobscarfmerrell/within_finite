@@ -11,7 +11,7 @@ const ChordForm = props => {
     return(
       <div key={interval} className='note-checkbox'>
         <label htmlFor={interval}>{interval}</label>
-        <input type="checkbox" id={interval} defaultChecked={checked}/>
+        <input type="checkbox" id={toneIndices[index]} defaultChecked={checked}/>
       </div>
     )
   })

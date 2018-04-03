@@ -44,6 +44,7 @@ class ToneSandBox extends Component {
         new Tone.Event(function(time, chord){
         }, chord.root.harmonize(chord.intervals))
         // harmonize() needed npm install tone@next to work
+        // https://groups.google.com/forum/#!topic/tonejs/cfOamTAfwd8
       )
     })
 
