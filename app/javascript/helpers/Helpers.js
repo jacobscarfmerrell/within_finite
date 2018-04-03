@@ -27,7 +27,8 @@ export function buildRhythm(lastRhythmId, length) {
   return (
     {
       id: lastRhythmId + 1,
-      chords: chordList
+      chords: chordList,
+      sequence: {}
     }
   )
 }
@@ -36,7 +37,8 @@ function seedRhythm() {
   return (
     {
       id: 1,
-      chords: [seedChord(1),seedChord(2)]
+      chords: [seedChord(1),seedChord(2)],
+      sequence: {}
     }
   )
 }

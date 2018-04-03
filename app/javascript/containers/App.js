@@ -5,9 +5,10 @@ import ChordContainer from './ChordContainer';
 import NoteContainer from './NoteContainer';
 import { Link } from 'react-router';
 import { INIT_STATE } from '../constants/Constants';
-import { buildSection, buildRhythm } from '../helpers/Helpers';
+import { seedApp, buildSection, buildRhythm } from '../helpers/Helpers';
 import AscendButton from '../components/AscendButton';
 import ToneSandBox from './ToneSandBox';
+import Tone from 'tone';
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class App extends Component {
       selectedChord: {},
       selectedNotes: [],
       tempo: 60,
-      app: {}
+      app: seedApp(),
+      sequences: []
     };
     this.handleAscend = this.handleAscend.bind(this);
     this.handleDescend = this.handleDescend.bind(this);
@@ -28,6 +30,93 @@ class App extends Component {
     this.createRhythm = this.createRhythm.bind(this);
     this.deleteRhythm = this.deleteRhythm.bind(this);
     this.changeTimbreHandler = this.changeTimbreHandler.bind(this);
+    this.onTempoChange = this.onTempoChange.bind(this);
+    this.loopToggle = this.loopToggle.bind(this);
+    this.setupRhythms = this.setupRhythms.bind(this);
+    this.setupRhythm = this.setupRhythm.bind(this);
+  }
+
+  loopToggle(e) {
+    if (e.target.checked) {
+      debugger;
+      let sectionId = Number(this.state.selectedSection.id)-1;
+      let rhythms = this.state.app.sections[sectionId].rhythms;
+      for (let i=0; i<rhythms.length; i++) {
+        rhythms[i].sequence.start(0);
+      }
+      Tone.Transport.start();
+    }
+    else {
+      Tone.Transport.pause();
+    }
+  }
+
+  onTempoChange(e) {
+    Tone.Transport.bpm.value = Number(e.target.value);
+    this.setState({ tempo: Number(e.target.value) })
+  }
+
+  setupRhythms() {
+    // I still need to double check that two rhythms play simultaneously when the rhythms are different
+    let sectionId = Number(this.state.selectedSection.id)-1
+    for (let i=0; i<this.state.app.sections[sectionId].rhythms.length; i++) {
+      this.setupRhythm(i);
+    }
+  }
+
+  setupRhythm(index) {
+    let rhythm = this.state.app.sections[this.state.selectedSection.id-1].rhythms[index];
+    let chords = rhythm.chords;
+    let synths = [];
+    for (let i=0; i<chords.length; i++) {
+      chords[i].synth.set({
+        "oscillator" : {
+          "type" : 'sine',
+          "partials": chords[i].partials
+        },
+        "filter" : {
+          "Q" : 0
+        }
+      });
+      synths.push(chords[i].synth)
+    }
+
+    let subdiv = chords.length;
+    let length = subdiv;
+    // this formatting only works with even divisions presently?
+    let subdivFormatted = `${subdiv}n`;
+    let lengthFormatted = `${length}n`;
+
+    let chordEvents = chords.map(chord => {
+      return(
+        new Tone.Event(function(time, chord){
+        }, chord.root.harmonize(chord.intervals))
+        // harmonize() needed npm install tone@next to work
+        // https://groups.google.com/forum/#!topic/tonejs/cfOamTAfwd8
+      )
+    })
+
+    if (Object.getOwnPropertyNames(rhythm.sequence).length != 0) {
+      rhythm.sequence.removeAll( )
+    }
+    let iterator = 0;
+    let seq = new Tone.Sequence(function(time,note) {
+      if (iterator == chordEvents.length) {
+        iterator = 0;
+      }
+      for (let i=0; i<note.length; i++) {
+        synths[iterator].triggerAttackRelease(note[i],lengthFormatted);
+      }
+      iterator += 1;
+    }, chordEvents, subdivFormatted);
+
+
+    // let sequences = Object.assign([],this.state.sequences)
+    // sequences.push(seq);
+    let app = Object.assign(this.state.app);
+    app.sections[this.state.selectedSection.id-1].rhythms[index].sequence = seq
+    // try storing these sequences in the rhythms
+    this.setState({ app });
   }
 
   createSection() {
@@ -136,6 +225,7 @@ class App extends Component {
       });
     }
     else if (this.state.view=='sectionRhythm') {
+      this.setupRhythms();
       let splitId = e.target.id.split('-');
       this.setState({
         view: 'rhythmChord',
@@ -182,14 +272,11 @@ class App extends Component {
     this.setState(INIT_STATE);
   }
 
-  // delete when ToneSandBox is removed
-  componentWillMount() {
-    this.setState(INIT_STATE);
-  }
-
   render() {
     let display;
     let {view, selectedSection, selectedRhythm, selectedChord, selectedNotes, app} = this.state;
+    Tone.Transport.bpm.value = this.state.tempo;
+
     // console.log('app',app);
 
     if (view == 'unmounted') {}
@@ -280,6 +367,10 @@ class App extends Component {
     }
     return (
       <div>
+        <div>
+          <input type="checkbox" onChange={this.loopToggle} />
+          <input type="range" onChange={this.onTempoChange} min="40" max="240"/>
+        </div>
         {display}
       </div>
     )
