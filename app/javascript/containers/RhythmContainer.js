@@ -34,7 +34,7 @@ class RhythmContainer extends Component {
           this.props.createHandler &&
           <form onSubmit={this.props.createHandler}>
             <input
-              type="number"
+              type="number" min="1" max="16"
               onClick={this.subdivValidator} />
             <input
               type="submit"

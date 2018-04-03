@@ -4,8 +4,7 @@ import SectionContainer from './SectionContainer';
 import ChordContainer from './ChordContainer';
 import NoteContainer from './NoteContainer';
 import { Link } from 'react-router';
-import { INIT_STATE } from '../constants/Constants';
-import { seedApp, buildSection, buildRhythm } from '../helpers/Helpers';
+import { seedApp, buildSection, buildRhythm, seedSection } from '../helpers/Helpers';
 import AscendButton from '../components/AscendButton';
 import ToneSandBox from './ToneSandBox';
 import Tone from 'tone';
@@ -38,12 +37,6 @@ class App extends Component {
 
   loopToggle(e) {
     if (e.target.checked) {
-      debugger;
-      let sectionId = Number(this.state.selectedSection.id)-1;
-      let rhythms = this.state.app.sections[sectionId].rhythms;
-      for (let i=0; i<rhythms.length; i++) {
-        rhythms[i].sequence.start(0);
-      }
       Tone.Transport.start();
     }
     else {
@@ -57,10 +50,11 @@ class App extends Component {
   }
 
   setupRhythms() {
-    // I still need to double check that two rhythms play simultaneously when the rhythms are different
     let sectionId = Number(this.state.selectedSection.id)-1
-    for (let i=0; i<this.state.app.sections[sectionId].rhythms.length; i++) {
+    let rhythms = this.state.app.sections[sectionId].rhythms;
+    for (let i=0; i<rhythms.length; i++) {
       this.setupRhythm(i);
+      rhythms[i].sequence.start(0);
     }
   }
 
@@ -159,40 +153,37 @@ class App extends Component {
   }
 
   deleteRhythm(e) {
-    let currentSectionId = this.state.selectedSection.id;
-    let rhythms = Object.assign({},this.state.selectedSection.rhythms);
+    let currentSectionIndex = this.state.selectedSection.id-1;
+    let app = Object.assign({},this.state.app);
+    let rhythms = app.sections[currentSectionIndex].rhythms;
 
     let index = 0;
-    let app = Object.assign({},this.state.app);
-    for (let i = 0; i < rhythms.length; i++) {
+    for (let i=0; i<rhythms.length; i++) {
       if (rhythms[i].id === Number(e.target.id)) {
         index = i;
       } else if (index != 0) {
         rhythms[i].id -= 1;
       }
     }
-
-    let sectionIndex = 0;
-    let newSections = this.state.app.sections;
-    for (let i = 0; i < newSections.length; i++) {
-        if (newSections[i].id === Number(e.target.id)) {
-          sectionIndex = i;
-        }
-    }
-    app.sections[sectionIndex].rhythms.splice(index,1);
+    rhythms.splice(index,1);
+    app.sections[currentSectionIndex].rhythms = rhythms;
+    debugger;
     this.setState({ app });
   }
 
   changeTimbreHandler(e) {
     let app = Object.assign({},this.state.app);
-    let currentSectionId = this.state.selectedSection.id;
-    let currentRhythmId = this.state.selectedRhythm.id;
-    let currentChordId = this.state.selectedChord.id;
-    app.sections[currentSectionId-1].rhythms[currentRhythmId-1].chords[currentChordId-1].partials[e.target.id] = Number(e.target.value);
+    let currentSectionIndex = this.state.selectedSection.id-1;
+    let currentRhythmIndex = this.state.selectedRhythm.id-1;
+    let currentChordIndex = this.state.selectedChord.id-1;
+    app.sections[currentSectionIndex].rhythms[currentRhythmIndex].chords[currentChordIndex].partials[e.target.id] = Number(e.target.value);
     this.setState({ app });
   }
 
   handleAscend(e) {
+    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
+      this.setupRhythms();
+    }
     if (this.state.view == 'sectionRhythm') {
       this.setState({
         selectedSection: {}
@@ -218,6 +209,9 @@ class App extends Component {
   }
 
   handleDescend(e) {
+    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
+      this.setupRhythms();
+    }
     if (this.state.view=='sectionRhythm' &&
     Object.getOwnPropertyNames(this.state.selectedSection).length === 0) {
       this.setState({
@@ -225,7 +219,6 @@ class App extends Component {
       });
     }
     else if (this.state.view=='sectionRhythm') {
-      this.setupRhythms();
       let splitId = e.target.id.split('-');
       this.setState({
         view: 'rhythmChord',
@@ -269,7 +262,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState(INIT_STATE);
+    this.setState({ view: 'sectionRhythm' });
   }
 
   render() {

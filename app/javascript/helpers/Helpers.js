@@ -8,9 +8,9 @@ function seedChord(id) {
       id: id,
       root: Tone.Frequency('A3'),
       synth: new Tone.PolySynth(8, Tone.Synth).toMaster(),
-      intervals: [0,3,7],
+      intervals: [0],
       partials: [
-          1.0, 0.5, 0.2, 0.0,
+          1.0, 0.0, 0.0, 0.0,
           0.0, 0.0, 0.0, 0.0,
           0.0, 0.0, 0.0, 0.0,
           0.0, 0.0, 0.0, 0.0
@@ -52,7 +52,7 @@ export function buildSection(lastSectionId) {
   )
 }
 
-function seedSection() {
+export function seedSection() {
   return (
     {
       id: 1,
