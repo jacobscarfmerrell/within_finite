@@ -2,27 +2,57 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "@material/button/mdc-button";
+#app {
+  margin: 1em 4em 1em 4em;
+}
 
-.foo-button {
-  @include mdc-button-ink-color(teal);
-  @include mdc-states(teal);
+#children {
+  border-top: 2px solid black;
+  border-radius: 3px;
+  padding: 1em;
+}
+
+#app-toolbar {
+  padding: 2px;
+  display: flex;
+}
+
+#tempo-slider {
+  flex: 1;
+}
+
+#app-views {
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+#switch-1-icon {
+  font-size: 34px;
+}
+
+.mdc-toolbar__title {
+  font-family: garamond, serif;
+}
+
+button {
+  padding: 0px;
+}
+
+.delete-section-button {
+  margin-left: 3px;
+  font-size: 18px;
+  display: inline;
+  background-color: pink;
+  border-radius: 8px;
 }
 
 .selected {
-  font-weight: bold;
+  border: 2px solid black;
 }
 
 .section-container {
   border: none;
-}
-
-.section-tile {
-  padding: 0.2em;
-  border: 2px solid;
-  border-radius: 3px;
-  margin: 2px;
-  width: 80%;
 }
 
 .rhythm-table {
@@ -30,26 +60,28 @@
   display: table;
 }
 
+#rhythm-form {
+  width: 70px;
+  display: inline-flex;
+}
+
 .rhythm-row {
   width: 80%;
   display: table-row;
 }
 
-.rhythm-tile {
-  list-style: none;
-  display: table-cell;
-  border: 1px solid black;
+.chord-submit {
 }
 
 .note-checkbox {
   list-style: none;
   border: 1px solid black;
-  padding: 2px;
+  padding: 1px;
 }
 
 .note-container {
   list-style: none;
-  display: inline-flex;
+  display: inline-block;
 }
 
 .note-cell {

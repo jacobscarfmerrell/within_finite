@@ -10,7 +10,7 @@ class RhythmContainer extends Component {
 
   render() {
     let rhythms = this.props.rhythms.map(rhythm => {
-      let className = 'rhythm-tile '
+      let className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent rhythm-tile '
       if (Object.getOwnPropertyNames(this.props.selectedRhythm).length != 0) {
         if (this.props.selectedRhythm.id == rhythm.id) {
           className += 'rhythm-selected '
@@ -32,13 +32,11 @@ class RhythmContainer extends Component {
       <ul className='rhythm-table'>
         {
           this.props.createHandler &&
-          <form onSubmit={this.props.createHandler}>
-            <input
-              type="number" min="1" max="16"
-              onClick={this.subdivValidator} />
-            <input
-              type="submit"
-            />
+          <form onSubmit={this.props.createHandler} id="rhythm-form">
+            <input type="number" min="1" max="16" required/>
+            <button type="submit" >
+              <i className="material-icons delete-section-button">add</i>
+            </button>
           </form>
         }
         {rhythms}

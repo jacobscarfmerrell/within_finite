@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import RhythmContainer from './RhythmContainer';
 import SectionContainer from './SectionContainer';
 import ChordContainer from './ChordContainer';
@@ -8,6 +9,7 @@ import { seedApp, buildSection, buildRhythm, seedSection } from '../helpers/Help
 import AscendButton from '../components/AscendButton';
 import ToneSandBox from './ToneSandBox';
 import Tone from 'tone';
+import {MDCSlider} from '@material/slider';
 
 class App extends Component {
   constructor(props) {
@@ -50,16 +52,29 @@ class App extends Component {
   }
 
   setupRhythms() {
-    let sectionId = Number(this.state.selectedSection.id)-1
+    let sectionId = 0;
+    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
+      sectionId = Number(this.state.selectedSection.id)-1;
+    }
+    let sections = this.state.app.sections
+    for (let i=0; i<sections.length; i++) {
+      if (sections[i].id != sectionId) {
+        for (let j=0; j<sections[i].rhythms.length; j++) {
+          if (Object.getOwnPropertyNames(sections[i].rhythms[j].sequence) != 0) {
+            sections[i].rhythms[j].sequence.stop();
+          }
+        }
+      }
+    }
     let rhythms = this.state.app.sections[sectionId].rhythms;
     for (let i=0; i<rhythms.length; i++) {
-      this.setupRhythm(i);
+      this.setupRhythm(i,sectionId);
       rhythms[i].sequence.start(0);
     }
   }
 
-  setupRhythm(index) {
-    let rhythm = this.state.app.sections[this.state.selectedSection.id-1].rhythms[index];
+  setupRhythm(index,sectionIndex) {
+    let rhythm = this.state.app.sections[sectionIndex].rhythms[index];
     let chords = rhythm.chords;
     let synths = [];
     for (let i=0; i<chords.length; i++) {
@@ -72,7 +87,7 @@ class App extends Component {
           "Q" : 0
         }
       });
-      synths.push(chords[i].synth)
+      synths.push(chords[i].synth);
     }
 
     let subdiv = chords.length;
@@ -87,11 +102,11 @@ class App extends Component {
         }, chord.root.harmonize(chord.intervals))
         // harmonize() needed npm install tone@next to work
         // https://groups.google.com/forum/#!topic/tonejs/cfOamTAfwd8
-      )
-    })
+      );
+    });
 
     if (Object.getOwnPropertyNames(rhythm.sequence).length != 0) {
-      rhythm.sequence.removeAll( )
+      rhythm.sequence.removeAll();
     }
     let iterator = 0;
     let seq = new Tone.Sequence(function(time,note) {
@@ -104,12 +119,8 @@ class App extends Component {
       iterator += 1;
     }, chordEvents, subdivFormatted);
 
-
-    // let sequences = Object.assign([],this.state.sequences)
-    // sequences.push(seq);
     let app = Object.assign(this.state.app);
-    app.sections[this.state.selectedSection.id-1].rhythms[index].sequence = seq
-    // try storing these sequences in the rhythms
+    app.sections[sectionIndex].rhythms[index].sequence = seq
     this.setState({ app });
   }
 
@@ -122,17 +133,17 @@ class App extends Component {
   }
 
   deleteSection(e) {
-    let index = 0
-    let newSections = Object.assign([],this.state.app.sections);
-    for (let i = 0; i < newSections.length; i++) {
-        if (newSections[i].id === Number(e.target.id)) {
-          index = i;
-        } else if (index != 0) {
-          newSections[i].id -= 1;
-        }
+    let index = 0;
+    let app = Object.assign({},this.state.app);
+    let newSections = app.sections;
+    for (let i = 0; i<newSections.length; i++) {
+      if (newSections[i].id === Number(e.currentTarget.id)) {
+        index = i;
+      } else if (index != 0) {
+        newSections[i].id -= 1;
+      }
     }
     newSections.splice(index,1);
-    let app = Object.assign({},this.state.app);
     app.sections = newSections;
     this.setState({ app });
   }
@@ -167,7 +178,6 @@ class App extends Component {
     }
     rhythms.splice(index,1);
     app.sections[currentSectionIndex].rhythms = rhythms;
-    debugger;
     this.setState({ app });
   }
 
@@ -181,9 +191,7 @@ class App extends Component {
   }
 
   handleAscend(e) {
-    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
-      this.setupRhythms();
-    }
+    this.setupRhythms();
     if (this.state.view == 'sectionRhythm') {
       this.setState({
         selectedSection: {}
@@ -209,9 +217,7 @@ class App extends Component {
   }
 
   handleDescend(e) {
-    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
-      this.setupRhythms();
-    }
+    this.setupRhythms();
     if (this.state.view=='sectionRhythm' &&
     Object.getOwnPropertyNames(this.state.selectedSection).length === 0) {
       this.setState({
@@ -269,13 +275,12 @@ class App extends Component {
     let display;
     let {view, selectedSection, selectedRhythm, selectedChord, selectedNotes, app} = this.state;
     Tone.Transport.bpm.value = this.state.tempo;
-
     // console.log('app',app);
 
     if (view == 'unmounted') {}
     else if (view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) {
       display = <div>
-        <h3>Add/Delete/Select Sections</h3>
+        <h3>Sections</h3>
           <SectionContainer
             createHandler={this.createSection}
             deleteHandler={this.deleteSection}
@@ -288,14 +293,13 @@ class App extends Component {
     }
     else if (view == 'sectionRhythm') {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Chosen Section</h3>
+        <h3>Section</h3>
         <SectionContainer
           sections={app.sections}
           selectedSection={selectedSection}
         />
         <hr/>
-        <h3>Add/Delete/Select Rhythms</h3>
+        <h3>Rhythms</h3>
         <RhythmContainer
           createHandler={this.createRhythm}
           deleteHandler={this.deleteRhythm}
@@ -308,8 +312,7 @@ class App extends Component {
     }
     else if (view == 'rhythmChord' && Object.getOwnPropertyNames(selectedRhythm).length === 0) {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Select Step</h3>
+        <h3>Steps</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
@@ -321,15 +324,14 @@ class App extends Component {
     }
     else if (view == 'rhythmChord') {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Selected Step</h3>
+        <h3>Step</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
           selectedChordId={selectedChord.id}
         />
         <hr/>
-        <h3>Select Chord-Tones</h3>
+        <h3>Chord-Tones</h3>
         <ChordContainer
           chords={selectedRhythm.chords}
           selectedChord={selectedChord}
@@ -339,7 +341,6 @@ class App extends Component {
     }
     else if (view == 'chordNote') {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
         <h3>Chord</h3>
         <ChordContainer
           chords={selectedRhythm.chords}
@@ -348,23 +349,34 @@ class App extends Component {
           intervals={selectedNotes}
         />
         <hr/>
-        <h3>Note</h3>
+        <h3>Partials</h3>
         <NoteContainer
           selectedChord={selectedChord}
           handleChange={this.changeTimbreHandler}
         />
       </div>;
     }
-    else if (view == 'sandbox') {
-      display = <ToneSandBox app={this.state.app} tempo={this.state.tempo}/>
-    }
+
     return (
       <div>
-        <div>
-          <input type="checkbox" onChange={this.loopToggle} />
-          <input type="range" onChange={this.onTempoChange} min="40" max="240"/>
+        <div id="app-toolbar">
+          {!(view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) &&
+              <AscendButton handleClick={this.handleAscend} />
+          }
+          <label className="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" htmlFor="switch-1">
+            <i className="mdl-icon-toggle__label material-icons" id="switch-1-icon">play_circle_outline</i>
+            <input type="checkbox" id="switch-1" className="mdl-icon-toggle__input" onClick={this.loopToggle} />
+          </label>
+          <label htmlFor="tempo-slider" id="tempo-slider">
+            Tempo
+            <input className="mdl-slider mdl-js-slider" onChange={this.onTempoChange} type="range"
+              min="40" max="240" defaultValue="60" tabIndex="0" />
+          </label>
         </div>
-        {display}
+
+        <div id="app-views">
+          {display}
+        </div>
       </div>
     )
   }
