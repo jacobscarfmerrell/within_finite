@@ -9,7 +9,7 @@ class NoteContainer extends Component {
   }
   render() {
     return (
-      <NoteTile selectedNote={this.props.selectedNote}/>
+      <NoteTile selectedChord={this.props.selectedChord} handleChange={this.props.handleChange}/>
     )
   }
 }

@@ -1,19 +1,18 @@
 import React from 'react';
+import Tone from 'tone';
 
 const NoteTile = props => {
-  let note = props.selectedNote;
-  // the below will not work on its own; note.fundamental is an id not a frequency
-  let fundamentalChart = [220.00,233.08,246.94,261.63,277.18,293.66,311.13,329.63,349.23,369.99,392.00,415.30];
-  let fundamentalFrequency = fundamentalChart[note.fundamental-1];
-  let harmonics = note.harmonics.map((harmonicAmplitude, index) => {
-    let frequency = fundamentalFrequency*(index+1);
+  let partialsSliders = props.selectedChord.partials.map((partial,index) => {
     return(
-      <li key={frequency}>F: {frequency}, A: {harmonicAmplitude}</li>
+      <div key={index}>
+        <label htmlFor={index}>{index+1}</label>
+        <input className="mdl-slider mdl-js-slider" onChange={props.handleChange} type="range" id={index} defaultValue={partial} min='0.0' max='1.0' step="0.001"/>
+      </div>
     )
-  });
+  })
   return(
     <div>
-      {harmonics}
+      {partialsSliders}
     </div>
   )
 }

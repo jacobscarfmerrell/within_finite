@@ -1,67 +1,70 @@
+import Tone from 'tone';
+
 const tones = ['=R','-2','+2','-3','+3','-4','=T','+5','-6','+6','-7','+7'];
-function note(fundamental) {
-  return (
-    { volume: 0.0,
-      id: tones[fundamental-1],
-      fundamental: fundamental,
-      harmonics: [
-        0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-      ]
-    }
-  )
-}
 
-function notes(num) {
-  let notes = [];
-  for (let i=1; i<=num; i++) {
-    notes.push(note(i));
-  }
-  return notes;
-}
-
-function chord(id) {
+function seedChord(id) {
   return(
     {
       id: id,
-      notes: notes(12)
+      root: Tone.Frequency('A3'),
+      synth: new Tone.PolySynth(8, Tone.Synth).toMaster(),
+      intervals: [0],
+      partials: [
+          1.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0,
+          0.0, 0.0, 0.0, 0.0
+        ]
     }
   )
 }
 
-function rhythm(divisor, id) {
-  let steps = [];
-  for (let i=1; i<=divisor; i++) {
-    steps.push(chord(i))
+export function buildRhythm(lastRhythmId, length) {
+  let chordList = [];
+  for (let i=1; i<=length; i++) {
+    chordList.push(seedChord(i))
   }
   return (
     {
-      id: id,
-      chords: steps
+      id: lastRhythmId + 1,
+      chords: chordList,
+      sequence: {}
     }
   )
 }
 
-function section(numRhythms, id) {
-  let rhythmList = [];
-  for (let i=1; i<=numRhythms; i++) {
-    rhythmList.push(rhythm(4, i))
-  }
+function seedRhythm() {
   return (
     {
-      id: id,
-      rhythms: rhythmList
+      id: 1,
+      chords: [seedChord(1),seedChord(2)],
+      sequence: {}
     }
   )
 }
 
-export function app(numSections) {
-  let sectionList = [];
-  for (let i=1; i<=numSections; i++) {
-    sectionList.push(section(2, i))
-  }
+export function buildSection(lastSectionId) {
   return (
     {
-      sections: sectionList
+      id: lastSectionId + 1,
+      rhythms: [seedRhythm()]
+    }
+  )
+}
+
+export function seedSection() {
+  return (
+    {
+      id: 1,
+      rhythms: [seedRhythm()]
+    }
+  )
+}
+
+export function seedApp() {
+  return (
+    {
+      sections: [seedSection()]
     }
   )
 }

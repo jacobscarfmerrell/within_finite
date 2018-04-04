@@ -14,9 +14,17 @@ const RhythmTile = props => {
     );
   }
   return(
-    <ul className="rhythm-row" id={props.id} >
-      {stepLis}
-    </ul>
+    <div className="rhythm-row">
+      <ul id={props.id} >
+        {stepLis}
+        {
+          (props.id > 1 && props.deleteHandler) &&
+          <i id={props.id} onClick={props.deleteHandler} className="material-icons delete-section-button">
+            delete
+          </i>
+        }
+      </ul>
+    </div>
   )
 }
 

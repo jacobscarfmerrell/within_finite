@@ -4,14 +4,16 @@ import { Link } from 'react-router';
 const Layout = (props) => {
   return(
     <div>
-      <nav className="side-bar">
-        <section className="side-bar-section">
-          <ul className="top">
-          </ul>
-        </section>
-      </nav>
-
-      {props.children}
+      <header className="mdc-toolbar">
+        <div className="mdc-toolbar__row">
+          <section className="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <span className="mdc-toolbar__title">within:Finite</span>
+          </section>
+        </div>
+      </header>
+      <div id="children">
+        {props.children}
+      </div>
     </div>
   )
 }

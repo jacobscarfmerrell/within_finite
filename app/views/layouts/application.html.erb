@@ -1,30 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>WithinFinite</title>
+  <title>within:Finite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <%= javascript_include_tag "vendor/modernizr" %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
-
-    <%= javascript_include_tag "vendor/modernizr" %>
 
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <nav class="top-bar">
-    <ul class="title-area">
-      <li class="name">
-        <h1><a href="/">withinFinite</a></h1>
-      </li>
-    </ul>
-
-    <section class="top-bar-section">
-      <ul class="right">
-
-      </ul>
-    </section>
-  </nav>
-
   <%- flash.each do |key, value| -%>
     <div class="flash flash-<%= key %>">
       <%= value %>

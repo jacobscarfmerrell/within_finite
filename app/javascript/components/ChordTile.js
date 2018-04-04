@@ -1,65 +1,20 @@
 import React from 'react';
 
 const ChordTile = props => {
-  let brights = [];
-  for (let i=0;i<props.notes.length; i++) {
-    let className = props.className;
-    if (props.selectedNoteId == (i+1) && props.className.includes('chord-selected')) {
-      className = 'selected ' + className;
-    }
-    if (props.notes[i].id[0]=='+') {
-      brights.push(
-        <li
-          className={className+'chord-tile-bright'}
-          id={`${props.id}`+'-'+`${props.notes[i].fundamental}`}
-          key={props.notes[i].id[1]}
-        >
-          {props.notes[i].id[1]}
-        </li>
-      );
-    }
-  }
-  let darks = [];
-  for (let i=0;i<props.notes.length; i++) {
-    let className = props.className;
-    if (props.selectedNoteId == (i+1) && props.className.includes('chord-selected')) {
-      className = 'selected ' + className
-    }
-    if (props.notes[i].id[0]=='-') {
-      darks.push(
-        <li
-          className={className+'chord-tile-dark'}
-          id={`${props.id}`+'-'+`${props.notes[i].fundamental}`}
-          key={props.notes[i].id[1]}
-        >
-          {props.notes[i].id[1]}
-        </li>
-      );
-    }
-  }
-  let neutrals = [];
-  for (let i=0;i<props.notes.length; i++) {
-    let className = props.className;
-    if (props.selectedNoteId == (i+1) && props.className.includes('chord-selected')) {
-      className = 'selected ' + className
-    }
-    if (props.notes[i].id[0]=='=') {
-      neutrals.push(
-        <li
-          className={className+'chord-tile-neutral'}
-          id={`${props.id}`+'-'+`${props.notes[i].fundamental}`}
-          key={props.notes[i].id[1]}
-        >
-          {props.notes[i].id[1]}
-        </li>
-      );
-    }
-  }
+  let tones = ['R','ii','II','iii','III','iv','IV/v','V','vi','VI','vii','VII','O','ix','IX','x','X','xi','XI','xiii','XIII'];
+  let toneIndices = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,21]
+
+  let chordRow = props.intervals.map((interval) => {
+    let toneIndex = toneIndices.findIndex(function(element) {
+      return element == interval
+    })
+    return(
+      <li className="note-cell" key={interval}>{tones[toneIndex]}</li>
+    )
+  })
   return(
-    <ul className='chord-row' id={props.id} onClick={props.handleClick}>
-      {darks}
-      {neutrals}
-      {brights}
+    <ul className="note-container">
+      {chordRow}
     </ul>
   )
 }

@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import RhythmContainer from './RhythmContainer';
 import SectionContainer from './SectionContainer';
 import ChordContainer from './ChordContainer';
 import NoteContainer from './NoteContainer';
 import { Link } from 'react-router';
-import { INIT_STATE } from '../constants/Constants';
+import { seedApp, buildSection, buildRhythm, seedSection } from '../helpers/Helpers';
 import AscendButton from '../components/AscendButton';
+import ToneSandBox from './ToneSandBox';
+import Tone from 'tone';
+import {MDCSlider} from '@material/slider';
 
 class App extends Component {
   constructor(props) {
@@ -15,14 +19,179 @@ class App extends Component {
       selectedSection: {},
       selectedRhythm: {},
       selectedChord: {},
-      selectedNote: {},
-      app: {}
+      selectedNotes: [],
+      tempo: 60,
+      app: seedApp(),
+      sequences: []
     };
     this.handleAscend = this.handleAscend.bind(this);
     this.handleDescend = this.handleDescend.bind(this);
+    this.createSection = this.createSection.bind(this);
+    this.deleteSection = this.deleteSection.bind(this);
+    this.createRhythm = this.createRhythm.bind(this);
+    this.deleteRhythm = this.deleteRhythm.bind(this);
+    this.changeTimbreHandler = this.changeTimbreHandler.bind(this);
+    this.onTempoChange = this.onTempoChange.bind(this);
+    this.loopToggle = this.loopToggle.bind(this);
+    this.setupRhythms = this.setupRhythms.bind(this);
+    this.setupRhythm = this.setupRhythm.bind(this);
+  }
+
+  loopToggle(e) {
+    if (e.target.checked) {
+      Tone.Transport.start();
+    }
+    else {
+      Tone.Transport.pause();
+    }
+  }
+
+  onTempoChange(e) {
+    Tone.Transport.bpm.value = Number(e.target.value);
+    this.setState({ tempo: Number(e.target.value) })
+  }
+
+  setupRhythms() {
+    let sectionId = 0;
+    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
+      sectionId = Number(this.state.selectedSection.id)-1;
+    }
+    let sections = this.state.app.sections
+    for (let i=0; i<sections.length; i++) {
+      if (sections[i].id != sectionId) {
+        for (let j=0; j<sections[i].rhythms.length; j++) {
+          if (Object.getOwnPropertyNames(sections[i].rhythms[j].sequence) != 0) {
+            sections[i].rhythms[j].sequence.stop();
+          }
+        }
+      }
+    }
+    let rhythms = this.state.app.sections[sectionId].rhythms;
+    for (let i=0; i<rhythms.length; i++) {
+      this.setupRhythm(i,sectionId);
+      rhythms[i].sequence.start(0);
+    }
+  }
+
+  setupRhythm(index,sectionIndex) {
+    let rhythm = this.state.app.sections[sectionIndex].rhythms[index];
+    let chords = rhythm.chords;
+    let synths = [];
+    for (let i=0; i<chords.length; i++) {
+      chords[i].synth.set({
+        "oscillator" : {
+          "type" : 'sine',
+          "partials": chords[i].partials
+        },
+        "filter" : {
+          "Q" : 0
+        }
+      });
+      synths.push(chords[i].synth);
+    }
+
+    let subdiv = chords.length;
+    let length = subdiv;
+    // this formatting only works with even divisions presently?
+    let subdivFormatted = `${subdiv}n`;
+    let lengthFormatted = `${length}n`;
+
+    let chordEvents = chords.map(chord => {
+      return(
+        new Tone.Event(function(time, chord){
+        }, chord.root.harmonize(chord.intervals))
+        // harmonize() needed npm install tone@next to work
+        // https://groups.google.com/forum/#!topic/tonejs/cfOamTAfwd8
+      );
+    });
+
+    if (Object.getOwnPropertyNames(rhythm.sequence).length != 0) {
+      rhythm.sequence.removeAll();
+    }
+    let iterator = 0;
+    let seq = new Tone.Sequence(function(time,note) {
+      if (iterator == chordEvents.length) {
+        iterator = 0;
+      }
+      for (let i=0; i<note.length; i++) {
+        synths[iterator].triggerAttackRelease(note[i],lengthFormatted);
+      }
+      iterator += 1;
+    }, chordEvents, subdivFormatted);
+
+    let app = Object.assign(this.state.app);
+    app.sections[sectionIndex].rhythms[index].sequence = seq
+    this.setState({ app });
+  }
+
+  createSection() {
+    let app = Object.assign({},this.state.app);
+    let oldSections = this.state.app.sections;
+    let newSection = buildSection(oldSections[oldSections.length-1].id);
+    app.sections.push(newSection);
+    this.setState({ app });
+  }
+
+  deleteSection(e) {
+    let index = 0;
+    let app = Object.assign({},this.state.app);
+    let newSections = app.sections;
+    for (let i = 0; i<newSections.length; i++) {
+      if (newSections[i].id === Number(e.currentTarget.id)) {
+        index = i;
+      } else if (index != 0) {
+        newSections[i].id -= 1;
+      }
+    }
+    newSections.splice(index,1);
+    app.sections = newSections;
+    this.setState({ app });
+  }
+
+  createRhythm(e) {
+    e.preventDefault();
+    let currentSectionId = this.state.selectedSection.id;
+    let rhythms = this.state.selectedSection.rhythms;
+    let newRhythm = buildRhythm(rhythms[rhythms.length-1].id,Number(e.target[0].value));
+
+    let app = Object.assign({},this.state.app);
+    for (let i = 0; i < app.sections.length; i++) {
+        if (app.sections[i].id === currentSectionId) {
+          app.sections[i].rhythms.push(newRhythm);
+        }
+    }
+    this.setState({ app });
+  }
+
+  deleteRhythm(e) {
+    let currentSectionIndex = this.state.selectedSection.id-1;
+    let app = Object.assign({},this.state.app);
+    let rhythms = app.sections[currentSectionIndex].rhythms;
+
+    let index = 0;
+    for (let i=0; i<rhythms.length; i++) {
+      if (rhythms[i].id === Number(e.target.id)) {
+        index = i;
+      } else if (index != 0) {
+        rhythms[i].id -= 1;
+      }
+    }
+    rhythms.splice(index,1);
+    app.sections[currentSectionIndex].rhythms = rhythms;
+    this.setState({ app });
+  }
+
+  changeTimbreHandler(e) {
+    let app = Object.assign({},this.state.app);
+    let currentSectionIndex = this.state.selectedSection.id-1;
+    let currentRhythmIndex = this.state.selectedRhythm.id-1;
+    let currentChordIndex = this.state.selectedChord.id-1;
+    app.sections[currentSectionIndex].rhythms[currentRhythmIndex].chords[currentChordIndex].partials[e.target.id] = Number(e.target.value);
+    this.setState({ app });
   }
 
   handleAscend(e) {
+    this.setupRhythms();
     if (this.state.view == 'sectionRhythm') {
       this.setState({
         selectedSection: {}
@@ -40,20 +209,15 @@ class App extends Component {
         selectedRhythm: {}
       });
     }
-    else if (this.state.view == 'chordNote' &&
-    Object.getOwnPropertyNames(this.state.selectedNote).length === 0) {
-      this.setState({
-        view: 'rhythmChord'
-      });
-    }
     else if (this.state.view == 'chordNote') {
       this.setState({
-        selectedNote: {}
+        view: 'rhythmChord'
       });
     }
   }
 
   handleDescend(e) {
+    this.setupRhythms();
     if (this.state.view=='sectionRhythm' &&
     Object.getOwnPropertyNames(this.state.selectedSection).length === 0) {
       this.setState({
@@ -77,36 +241,49 @@ class App extends Component {
       });
     }
     else if (this.state.view == 'rhythmChord') {
-      let splitId = e.target.id.split('-');
+      e.preventDefault();
+      let intervals = [];
+      for (let i=0; i<e.target.length; i++) {
+        if (e.target[i].checked) {
+          intervals.push(Number(e.target[i].id));
+        }
+      }
+      let app = Object.assign({},this.state.app);
+      let sectionId = this.state.selectedSection.id;
+      let rhythmId = this.state.selectedRhythm.id;
+      let chordId = this.state.selectedChord.id;
+      app.sections[sectionId-1].rhythms[rhythmId-1].chords[chordId-1].intervals = intervals;
       this.setState({
-        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1],
-        selectedNote: this.state.selectedRhythm.chords[Number(splitId[0])-1].notes[Number(splitId[1])-1],
+        app: app,
+        selectedNotes: intervals,
         view: 'chordNote'
       });
     }
     else if (this.state.view == 'chordNote' && Object.getOwnPropertyNames(this.state.selectedNote).length === 0) {
       let splitId = e.target.id.split('-');
       this.setState({
-        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1],
-        selectedNote: this.state.selectedRhythm.chords[Number(splitId[0])-1].notes[Number(splitId[1])-1]
+        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1]
       });
     }
   }
 
   componentDidMount() {
-    this.setState(INIT_STATE);
+    this.setState({ view: 'sectionRhythm' });
   }
 
   render() {
     let display;
-    let {view, selectedSection, selectedRhythm, selectedChord, selectedNote, app} = this.state;
-    console.log('app',app);
+    let {view, selectedSection, selectedRhythm, selectedChord, selectedNotes, app} = this.state;
+    Tone.Transport.bpm.value = this.state.tempo;
+    // console.log('app',app);
 
     if (view == 'unmounted') {}
     else if (view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) {
       display = <div>
         <h3>Sections</h3>
           <SectionContainer
+            createHandler={this.createSection}
+            deleteHandler={this.deleteSection}
             sections={app.sections}
             selectedSection={selectedSection}
             handleClick={this.handleDescend}
@@ -116,8 +293,7 @@ class App extends Component {
     }
     else if (view == 'sectionRhythm') {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Sections</h3>
+        <h3>Section</h3>
         <SectionContainer
           sections={app.sections}
           selectedSection={selectedSection}
@@ -125,6 +301,8 @@ class App extends Component {
         <hr/>
         <h3>Rhythms</h3>
         <RhythmContainer
+          createHandler={this.createRhythm}
+          deleteHandler={this.deleteRhythm}
           rhythms={selectedSection.rhythms}
           selectedChordId={selectedChord.id}
           selectedRhythm={selectedRhythm}
@@ -134,8 +312,7 @@ class App extends Component {
     }
     else if (view == 'rhythmChord' && Object.getOwnPropertyNames(selectedRhythm).length === 0) {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Rhythms</h3>
+        <h3>Steps</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
@@ -146,58 +323,60 @@ class App extends Component {
       </div>;
     }
     else if (view == 'rhythmChord') {
-      console.log(selectedNote);
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Rhythms</h3>
+        <h3>Step</h3>
         <RhythmContainer
           rhythms={selectedSection.rhythms}
           selectedRhythm={selectedRhythm}
           selectedChordId={selectedChord.id}
         />
         <hr/>
-        <h3>Chord</h3>
+        <h3>Chord-Tones</h3>
         <ChordContainer
           chords={selectedRhythm.chords}
           selectedChord={selectedChord}
-          selectedNoteId={selectedNote.fundamental}
-          handleClick={this.handleDescend}
+          handleDescend={this.handleDescend}
         />
-      </div>;
-    }
-    else if (view == 'chordNote' && Object.getOwnPropertyNames(selectedNote).length === 0) {
-      display = <div>
-        <AscendButton handleClick={this.handleAscend} />
-        <h3>Chord</h3>
-        <ChordContainer
-          chords={selectedRhythm.chords}
-          selectedChord={selectedChord}
-          selectedNoteId={selectedNote.fundamental}
-          handleClick={this.handleDescend}
-        />
-        <hr/>
       </div>;
     }
     else if (view == 'chordNote') {
       display = <div>
-        <AscendButton handleClick={this.handleAscend} />
         <h3>Chord</h3>
         <ChordContainer
           chords={selectedRhythm.chords}
           selectedChord={selectedChord}
-          selectedNoteId={selectedNote.fundamental}
           handleClick={this.handleDescend}
+          intervals={selectedNotes}
         />
         <hr/>
-        <h3>Note</h3>
+        <h3>Partials</h3>
         <NoteContainer
-          selectedNote={selectedNote}
+          selectedChord={selectedChord}
+          handleChange={this.changeTimbreHandler}
         />
       </div>;
     }
+
     return (
       <div>
-        {display}
+        <div id="app-toolbar">
+          {!(view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) &&
+              <AscendButton handleClick={this.handleAscend} />
+          }
+          <label className="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" htmlFor="switch-1">
+            <i className="mdl-icon-toggle__label material-icons" id="switch-1-icon">play_circle_outline</i>
+            <input type="checkbox" id="switch-1" className="mdl-icon-toggle__input" onClick={this.loopToggle} />
+          </label>
+          <label htmlFor="tempo-slider" id="tempo-slider">
+            Tempo
+            <input className="mdl-slider mdl-js-slider" onChange={this.onTempoChange} type="range"
+              min="40" max="240" defaultValue="60" tabIndex="0" />
+          </label>
+        </div>
+
+        <div id="app-views">
+          {display}
+        </div>
       </div>
     )
   }
