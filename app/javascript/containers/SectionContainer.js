@@ -10,9 +10,12 @@ class SectionContainer extends Component {
   render() {
     let sections = this.props.sections.map(section => {
       let className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent section-tile ';
-      if (this.props.selectedSection.id == section.id) {
-        className += 'selected';
+      if (this.props.selectedSection != null) {
+        if (this.props.selectedSection.id == section.id) {
+          className += 'selected';
+        }
       }
+
       return(
         <SectionTile
           key={section.id}
@@ -30,7 +33,7 @@ class SectionContainer extends Component {
           <tr>
             {
               this.props.createHandler &&
-              <td  onClick={this.props.createHandler}><i className="material-icons delete-section-button">add</i></td>
+              <td onClick={this.props.createHandler}><i className="material-icons delete-section-button">add</i></td>
             }
             {sections}
           </tr>
