@@ -101,7 +101,7 @@ class App extends Component {
     }
 
     let subdiv = chords.length;
-    let length = subdiv*2; // half-step duration
+    let length = subdiv;
     let subdivFormatted = `${subdiv}n`;
     let lengthFormatted = `${length}n`;
 
@@ -180,6 +180,7 @@ class App extends Component {
     let index = 0;
     for (let i=0; i<rhythms.length; i++) {
       if (rhythms[i].id === Number(e.target.id)) {
+        rhythms[i].sequence.removeAll();
         index = i;
       } else if (index != 0) {
         rhythms[i].id -= 1;
