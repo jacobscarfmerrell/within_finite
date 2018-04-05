@@ -92,11 +92,7 @@ class App extends Component {
         "oscillator" : {
           "type" : 'sine',
           "partials": chords[i].partials
-        },
-        "filter" : {
-          "Q" : 0
-        },
-        "volume": -8
+        }
       });
       synths.push(chords[i].synth);
     }
