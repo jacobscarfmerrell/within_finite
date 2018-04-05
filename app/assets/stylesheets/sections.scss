@@ -15,10 +15,14 @@
 #app-toolbar {
   padding: 2px;
   display: flex;
+  align-items: center;
 }
 
 #tempo-slider {
   flex: 1;
+  text-align: right;
+  width: 75%;
+
 }
 
 #app-views {
@@ -28,18 +32,32 @@
 }
 
 #switch-1-icon {
-  font-size: 34px;
+  font-size: 50px;
 }
 
 .mdc-toolbar__title {
   font-family: garamond, serif;
 }
 
+label {
+  display: inline-block;
+  text-align: right;
+}​
+
 button {
   padding: 0px;
+  margin: 0px;
 }
 
 .delete-section-button {
+  margin-left: 3px;
+  font-size: 18px;
+  display: inline;
+  background-color: pink;
+  border-radius: 8px;
+}
+
+.add-rhythm-button {
   margin-left: 3px;
   font-size: 18px;
   display: inline;

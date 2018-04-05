@@ -16,13 +16,13 @@ class App extends Component {
     super(props);
     this.state = {
       view: 'unmounted',
-      selectedSection: {},
-      selectedRhythm: {},
-      selectedChord: {},
+      selectedSectionId: 1,
+      lastSelectedSectionId: null,
+      selectedRhythmId: 1,
+      selectedChordId: null,
       selectedNotes: [],
       tempo: 60,
-      app: seedApp(),
-      sequences: []
+      app: seedApp()
     };
     this.handleAscend = this.handleAscend.bind(this);
     this.handleDescend = this.handleDescend.bind(this);
@@ -51,11 +51,21 @@ class App extends Component {
     this.setState({ tempo: Number(e.target.value) })
   }
 
-  setupRhythms() {
-    let sectionId = 0;
-    if (Object.getOwnPropertyNames(this.state.selectedSection).length != 0) {
-      sectionId = Number(this.state.selectedSection.id)-1;
+  setupRhythms(sectionIdClicked) {
+    let sectionId;
+
+    if (sectionIdClicked == null) {
+      if (this.state.selectedSectionId != null) {
+        sectionId = this.state.selectedSectionId;
+      }
+      else if (this.state.lastSelectedSectionId != null) {
+        sectionId = this.state.lastSelectedSectionId;
+      }
     }
+    else {
+      sectionId = sectionIdClicked;
+    }
+
     let sections = this.state.app.sections
     for (let i=0; i<sections.length; i++) {
       if (sections[i].id != sectionId) {
@@ -66,9 +76,9 @@ class App extends Component {
         }
       }
     }
-    let rhythms = this.state.app.sections[sectionId].rhythms;
+    let rhythms = this.state.app.sections[sectionId-1].rhythms;
     for (let i=0; i<rhythms.length; i++) {
-      this.setupRhythm(i,sectionId);
+      this.setupRhythm(i,sectionId-1);
       rhythms[i].sequence.start(0);
     }
   }
@@ -85,13 +95,14 @@ class App extends Component {
         },
         "filter" : {
           "Q" : 0
-        }
+        },
+        "volume": -8
       });
       synths.push(chords[i].synth);
     }
 
     let subdiv = chords.length;
-    let length = subdiv;
+    let length = subdiv*2;
     // this formatting only works with even divisions presently?
     let subdivFormatted = `${subdiv}n`;
     let lengthFormatted = `${length}n`;
@@ -150,8 +161,8 @@ class App extends Component {
 
   createRhythm(e) {
     e.preventDefault();
-    let currentSectionId = this.state.selectedSection.id;
-    let rhythms = this.state.selectedSection.rhythms;
+    let currentSectionId = this.state.selectedSectionId;
+    let rhythms = this.state.app.sections[this.state.selectedSectionId-1].rhythms;
     let newRhythm = buildRhythm(rhythms[rhythms.length-1].id,Number(e.target[0].value));
 
     let app = Object.assign({},this.state.app);
@@ -164,7 +175,7 @@ class App extends Component {
   }
 
   deleteRhythm(e) {
-    let currentSectionIndex = this.state.selectedSection.id-1;
+    let currentSectionIndex = this.state.selectedSectionId-1;
     let app = Object.assign({},this.state.app);
     let rhythms = app.sections[currentSectionIndex].rhythms;
 
@@ -183,30 +194,31 @@ class App extends Component {
 
   changeTimbreHandler(e) {
     let app = Object.assign({},this.state.app);
-    let currentSectionIndex = this.state.selectedSection.id-1;
-    let currentRhythmIndex = this.state.selectedRhythm.id-1;
-    let currentChordIndex = this.state.selectedChord.id-1;
+    let currentSectionIndex = this.state.selectedSectionId-1;
+    let currentRhythmIndex = this.state.selectedRhythmId-1;
+    let currentChordIndex = this.state.selectedChordId-1;
     app.sections[currentSectionIndex].rhythms[currentRhythmIndex].chords[currentChordIndex].partials[e.target.id] = Number(e.target.value);
     this.setState({ app });
   }
 
   handleAscend(e) {
-    this.setupRhythms();
+    this.setupRhythms(null);
     if (this.state.view == 'sectionRhythm') {
       this.setState({
-        selectedSection: {}
+        lastSelectedSectionId: this.state.selectedSectionId,
+        selectedSectionId: null
       });
     }
     else if (this.state.view == 'rhythmChord' &&
-    Object.getOwnPropertyNames(this.state.selectedRhythm).length === 0) {
+    this.state.app.sections[this.state.selectedSectionId-1].rhythms[this.state.selectedRhythmId-1] == null) {
       this.setState({
         view: 'sectionRhythm',
-        selectedRhythm: {}
+        selectedRhythmId: null
       });
     }
     else if (this.state.view == 'rhythmChord') {
       this.setState({
-        selectedRhythm: {}
+        selectedRhythmId: null
       });
     }
     else if (this.state.view == 'chordNote') {
@@ -217,27 +229,33 @@ class App extends Component {
   }
 
   handleDescend(e) {
-    this.setupRhythms();
+    if (this.state.selectedSectionId == null) {
+      if (this.state.app.sections[Number(e.target.id)-1].id != null) {
+        this.setupRhythms(this.state.app.sections[Number(e.target.id)-1].id)
+      }
+    }
+    else { this.setupRhythms(null) }
     if (this.state.view=='sectionRhythm' &&
-    Object.getOwnPropertyNames(this.state.selectedSection).length === 0) {
+    this.state.selectedSectionId == null) {
       this.setState({
-        selectedSection: this.state.app.sections[Number(e.target.id)-1]
+        selectedSectionId: this.state.app.sections[Number(e.target.id)-1].id,
+        selectedRhythmId: 1 // not sure abt this yet!!!!!!!!!!!!!!!!
       });
     }
     else if (this.state.view=='sectionRhythm') {
       let splitId = e.target.id.split('-');
       this.setState({
         view: 'rhythmChord',
-        selectedRhythm: this.state.selectedSection.rhythms[Number(splitId[0])-1],
-        selectedChord: this.state.selectedSection.rhythms[Number(splitId[0])-1].chords[Number(splitId[1])-1]
+        selectedRhythmId: this.state.app.sections[this.state.selectedSectionId-1].rhythms[Number(splitId[0])-1].id,
+        selectedChordId: this.state.app.sections[this.state.selectedSectionId-1].rhythms[Number(splitId[0])-1].chords[Number(splitId[1])-1].id
       });
     }
     else if (this.state.view == 'rhythmChord' &&
-    Object.getOwnPropertyNames(this.state.selectedRhythm).length === 0) {
+    this.state.selectedRhythmId == null) {
       let splitId = e.target.id.split('-');
       this.setState({
-        selectedRhythm: this.state.selectedSection.rhythms[Number(splitId[0])-1],
-        selectedChord: this.state.selectedSection.rhythms[Number(splitId[0])-1].chords[Number(splitId[1])-1]
+        selectedRhythmId: this.state.app.sections[this.state.selectedSectionId-1].rhythms[Number(splitId[0])-1].id,
+        selectedChordId: this.state.app.sections[this.state.selectedSectionId-1].rhythms[Number(splitId[0])-1].chords[Number(splitId[1])-1].id
       });
     }
     else if (this.state.view == 'rhythmChord') {
@@ -249,43 +267,44 @@ class App extends Component {
         }
       }
       let app = Object.assign({},this.state.app);
-      let sectionId = this.state.selectedSection.id;
-      let rhythmId = this.state.selectedRhythm.id;
-      let chordId = this.state.selectedChord.id;
-      app.sections[sectionId-1].rhythms[rhythmId-1].chords[chordId-1].intervals = intervals;
+      let sectionIndex = this.state.selectedSectionId-1;
+      let rhythmIndex = this.state.selectedRhythmId-1;
+      let chordIndex = this.state.selectedChordId-1;
+      app.sections[sectionIndex].rhythms[rhythmIndex].chords[chordIndex].intervals = intervals;
       this.setState({
         app: app,
         selectedNotes: intervals,
         view: 'chordNote'
       });
     }
-    else if (this.state.view == 'chordNote' && Object.getOwnPropertyNames(this.state.selectedNote).length === 0) {
+    else if (this.state.view == 'chordNote' && this.state.selectedNotes.length == 0) {
       let splitId = e.target.id.split('-');
       this.setState({
-        selectedChord: this.state.selectedRhythm.chords[Number(splitId[0])-1]
+        selectedChordId: this.state.app.sections[this.state.selectedSectionId-1].rhythms[this.state.selectedRhythmId-1].chords[Number(splitId[0])-1].id
       });
     }
   }
 
   componentDidMount() {
+    this.setupRhythms();
     this.setState({ view: 'sectionRhythm' });
   }
 
   render() {
     let display;
-    let {view, selectedSection, selectedRhythm, selectedChord, selectedNotes, app} = this.state;
+    let {view, selectedSectionId, selectedRhythmId, selectedChordId, selectedNotes, app} = this.state;
     Tone.Transport.bpm.value = this.state.tempo;
     // console.log('app',app);
 
     if (view == 'unmounted') {}
-    else if (view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) {
+    else if (view == 'sectionRhythm' && selectedSectionId == null) {
       display = <div>
         <h3>Sections</h3>
           <SectionContainer
             createHandler={this.createSection}
             deleteHandler={this.deleteSection}
             sections={app.sections}
-            selectedSection={selectedSection}
+            selectedSection={app.sections[selectedSectionId-1]}
             handleClick={this.handleDescend}
           />
         <hr/>
@@ -296,27 +315,27 @@ class App extends Component {
         <h3>Section</h3>
         <SectionContainer
           sections={app.sections}
-          selectedSection={selectedSection}
+          selectedSection={app.sections[selectedSectionId-1]}
         />
         <hr/>
         <h3>Rhythms</h3>
         <RhythmContainer
           createHandler={this.createRhythm}
           deleteHandler={this.deleteRhythm}
-          rhythms={selectedSection.rhythms}
-          selectedChordId={selectedChord.id}
-          selectedRhythm={selectedRhythm}
+          rhythms={app.sections[selectedSectionId-1].rhythms}
+          selectedChordId={selectedChordId}
+          selectedRhythm={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1]}
           handleClick={this.handleDescend}
         />
       </div>;
     }
-    else if (view == 'rhythmChord' && Object.getOwnPropertyNames(selectedRhythm).length === 0) {
+    else if (view == 'rhythmChord' && selectedRhythmId == null) {
       display = <div>
         <h3>Steps</h3>
         <RhythmContainer
-          rhythms={selectedSection.rhythms}
-          selectedRhythm={selectedRhythm}
-          selectedChordId={selectedChord.id}
+          rhythms={app.sections[selectedSectionId-1].rhythms}
+          selectedRhythm={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1]}
+          selectedChordId={selectedChordId}
           handleClick={this.handleDescend}
         />
         <hr/>
@@ -326,15 +345,15 @@ class App extends Component {
       display = <div>
         <h3>Step</h3>
         <RhythmContainer
-          rhythms={selectedSection.rhythms}
-          selectedRhythm={selectedRhythm}
-          selectedChordId={selectedChord.id}
+          rhythms={app.sections[selectedSectionId-1].rhythms}
+          selectedRhythm={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1]}
+          selectedChordId={selectedChordId}
         />
         <hr/>
         <h3>Chord-Tones</h3>
         <ChordContainer
-          chords={selectedRhythm.chords}
-          selectedChord={selectedChord}
+          chords={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1].chords}
+          selectedChord={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1].chords[selectedChordId-1]}
           handleDescend={this.handleDescend}
         />
       </div>;
@@ -343,15 +362,15 @@ class App extends Component {
       display = <div>
         <h3>Chord</h3>
         <ChordContainer
-          chords={selectedRhythm.chords}
-          selectedChord={selectedChord}
+          chords={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1].chords}
+          selectedChord={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1].chords[selectedChordId-1]}
           handleClick={this.handleDescend}
           intervals={selectedNotes}
         />
         <hr/>
         <h3>Partials</h3>
         <NoteContainer
-          selectedChord={selectedChord}
+          selectedChord={app.sections[selectedSectionId-1].rhythms[selectedRhythmId-1].chords[selectedChordId-1]}
           handleChange={this.changeTimbreHandler}
         />
       </div>;
@@ -360,7 +379,7 @@ class App extends Component {
     return (
       <div>
         <div id="app-toolbar">
-          {!(view == 'sectionRhythm' && Object.getOwnPropertyNames(selectedSection).length === 0) &&
+          {!(view == 'sectionRhythm' && selectedSectionId == null) &&
               <AscendButton handleClick={this.handleAscend} />
           }
           <label className="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" htmlFor="switch-1">
