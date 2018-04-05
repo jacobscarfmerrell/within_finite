@@ -32,8 +32,8 @@ class RhythmContainer extends Component {
       <ul className='rhythm-container'>
         {
           this.props.createHandler &&
-          <form onSubmit={this.props.createHandler} id="rhythm-form">
-            <input type="number" min="1" max="16" required/>
+          <form onSubmit={this.props.createHandler}>
+            <input type="number" min="1" max="16" required id="rhythm-form"/>
             <button type="submit" >
               <i className="material-icons add-rhythm-button">add</i>
             </button>

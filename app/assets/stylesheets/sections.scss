@@ -60,7 +60,9 @@ hr {
 
 #app-views {
   background-color: #feecfb;
-  border: 2px solid black;
+  border-color: darken(purple, 4%);
+  border-style: outset;
+  border-width: 2px;
   margin-top: 5px;
   border-radius: 5px;
   padding: 0.5em;
@@ -120,8 +122,11 @@ button {
 }
 
 #rhythm-form {
-  width: 70px;
+  width: 50px;
   display: inline-flex;
+  border: none;
+  border-bottom: solid black 2px;
+  border-radius: 8px;
 }
 
 .rhythm-row {
