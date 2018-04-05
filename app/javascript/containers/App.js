@@ -9,7 +9,6 @@ import { seedApp, buildSection, buildRhythm, seedSection } from '../helpers/Help
 import AscendButton from '../components/AscendButton';
 import ToneSandBox from './ToneSandBox';
 import Tone from 'tone';
-import {MDCSlider} from '@material/slider';
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +21,8 @@ class App extends Component {
       selectedChordId: null,
       selectedNotes: [],
       tempo: 60,
-      app: seedApp()
+      app: seedApp(),
+      playing: false
     };
     this.handleAscend = this.handleAscend.bind(this);
     this.handleDescend = this.handleDescend.bind(this);
@@ -40,9 +40,13 @@ class App extends Component {
   loopToggle(e) {
     if (e.target.checked) {
       Tone.Transport.start();
+      this.setState({playing: true})
+      document.getElementById("switch-1-icon").style.color = "#ecfbfe";
     }
     else {
       Tone.Transport.pause();
+      this.setState({playing: false})
+      document.getElementById("switch-1-icon").style.color = '#fdb4cd';
     }
   }
 
@@ -53,7 +57,6 @@ class App extends Component {
 
   setupRhythms(sectionIdClicked) {
     let sectionId;
-
     if (sectionIdClicked == null) {
       if (this.state.selectedSectionId != null) {
         sectionId = this.state.selectedSectionId;
@@ -98,8 +101,7 @@ class App extends Component {
     }
 
     let subdiv = chords.length;
-    let length = subdiv*2;
-    // this formatting only works with even divisions presently?
+    let length = subdiv*2; // half-step duration
     let subdivFormatted = `${subdiv}n`;
     let lengthFormatted = `${length}n`;
 
@@ -200,20 +202,16 @@ class App extends Component {
   handleAscend(e) {
     this.setupRhythms(null);
     if (this.state.view == 'sectionRhythm') {
+      document.getElementById("ascend").disabled = true;
+      // if (this.state.playing == true) { this.loopToggle() }
       this.setState({
         lastSelectedSectionId: this.state.selectedSectionId,
         selectedSectionId: null
       });
     }
-    else if (this.state.view == 'rhythmChord' &&
-    this.state.app.sections[this.state.selectedSectionId-1].rhythms[this.state.selectedRhythmId-1] == null) {
-      this.setState({
-        view: 'sectionRhythm',
-        selectedRhythmId: null
-      });
-    }
     else if (this.state.view == 'rhythmChord') {
       this.setState({
+        view: 'sectionRhythm',
         selectedRhythmId: null
       });
     }
@@ -233,9 +231,9 @@ class App extends Component {
     else { this.setupRhythms(null) }
     if (this.state.view=='sectionRhythm' &&
     this.state.selectedSectionId == null) {
+      document.getElementById("ascend").disabled = false;
       this.setState({
-        selectedSectionId: this.state.app.sections[Number(e.target.id)-1].id,
-        selectedRhythmId: 1 // not sure abt this yet!!!!!!!!!!!!!!!!
+        selectedSectionId: this.state.app.sections[Number(e.target.id)-1].id
       });
     }
     else if (this.state.view=='sectionRhythm') {
@@ -371,20 +369,23 @@ class App extends Component {
         />
       </div>;
     }
-
+    let ascend_disabled = false;
+    if (view == 'sectionRhythm' && selectedSectionId == null) {
+      ascend_disabled = true
+    }
     return (
       <div>
         <div id="app-toolbar">
-          {!(view == 'sectionRhythm' && selectedSectionId == null) &&
-              <AscendButton handleClick={this.handleAscend} />
-          }
-          <label className="mdl-icon-toggle mdl-js-icon-toggle mdl-js-ripple-effect" htmlFor="switch-1">
-            <i className="mdl-icon-toggle__label material-icons" id="switch-1-icon">play_circle_outline</i>
-            <input type="checkbox" id="switch-1" className="mdl-icon-toggle__input" onClick={this.loopToggle} />
-          </label>
+          <AscendButton handleClick={this.handleAscend} disable={ascend_disabled} />
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent ">
+            <label className="mdl-icon-toggle mdl-js-icon-toggle" htmlFor="switch-1">
+              <i className="mdl-icon-toggle__label material-icons md-light" id="switch-1-icon">play_circle_outline</i>
+              <input type="checkbox" id="switch-1" className="mdl-icon-toggle__input" onClick={this.loopToggle} />
+            </label>
+          </button>
           <label htmlFor="tempo-slider" id="tempo-slider">
-            Tempo
-            <input className="mdl-slider mdl-js-slider" onChange={this.onTempoChange} type="range"
+            <span id="tempo-slider-label">Tempo</span>
+            <input className="mdl-slider mdl-js-slider" onChange={this.onTempoChange} type="range" id="tempo-slider-input"
               min="40" max="240" defaultValue="60" tabIndex="0" />
           </label>
         </div>

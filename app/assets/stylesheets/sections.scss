@@ -2,14 +2,30 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  background-color: #ecfbfe;
+}
+
+.mdc-toolbar__title {
+  margin-left: 40px;
+  font-family: garamond, serif;
+  background-color: #ecfbfe;
+  font-size: 1.39em;
+}
+
 #app {
   margin: 1em 4em 1em 4em;
 }
 
 #children {
-  border-top: 2px solid black;
-  border-radius: 3px;
-  padding: 1em;
+  border-top: 0.15em solid black;
+  border-bottom: 0.15em solid black;
+  border-radius: 2px;
+  padding: 1.4em;
+  background-color: #b582b5;
+  box-shadow: inset 0.0em -0.4em 1em 0.8em #ecfbfe;
+  border-radius: 20px;
+
 }
 
 #app-toolbar {
@@ -22,21 +38,35 @@
   flex: 1;
   text-align: right;
   width: 75%;
+  font-family: garamond, serif;
+  color: #ecfbfe;
+  margin: 0px 10px 10px 30% ;
+}
 
+#tempo-slider-label {
+  margin-right: 10px;
+}
+
+#tempo-slider-input {
+  background-color: #ecfbfe;
+  color: pink;
 }
 
 #app-views {
-  border: 3px solid black;
+  background-color: #feecfb;
+  border: 2px solid black;
+  margin-top: 5px;
   border-radius: 5px;
   padding: 0.5em;
 }
 
 #switch-1-icon {
-  font-size: 50px;
+  font-size: 30px;
+  color: #fdb4cd;
 }
 
-.mdc-toolbar__title {
-  font-family: garamond, serif;
+#ascend {
+  margin-left: 10px;
 }
 
 label {
@@ -70,10 +100,15 @@ button {
 }
 
 .section-container {
-  border: none;
+  display: table-row;
+  list-style: none;
 }
 
-.rhythm-table {
+.section-row {
+  display: table-cell;
+}
+
+.rhythm-container {
   width: 80%;
   display: table;
 }

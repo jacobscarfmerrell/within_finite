@@ -9,9 +9,14 @@ const ChordTile = props => {
       return element == interval
     })
     return(
-      <li className="note-cell" key={interval}>{tones[toneIndex]}</li>
+      <li className="note-cell mdl-button mdl-button--raised mdl-button--accent " key={interval}>{tones[toneIndex]}</li>
     )
   })
+  if (chordRow.length == 0) {
+    chordRow.push(
+      <li className="note-cell mdl-button mdl-button--raised mdl-button--accent ">None</li>
+    )
+  }
   return(
     <ul className="note-container">
       {chordRow}

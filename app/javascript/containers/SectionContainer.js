@@ -9,7 +9,7 @@ class SectionContainer extends Component {
   }
   render() {
     let sections = this.props.sections.map(section => {
-      let className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent section-tile ';
+      let className = 'mdl-button mdl-js-button mdl-button--raised mdl-button--accent ';
       if (this.props.selectedSection != null) {
         if (this.props.selectedSection.id == section.id) {
           className += 'selected';
@@ -28,17 +28,13 @@ class SectionContainer extends Component {
       )
     })
     return (
-      <table className='section-container'>
-        <tbody>
-          <tr>
-            {
-              this.props.createHandler &&
-              <td onClick={this.props.createHandler}><i className="material-icons delete-section-button">add</i></td>
-            }
-            {sections}
-          </tr>
-        </tbody>
-      </table>
+      <ul className='section-container'>
+        {
+          this.props.createHandler &&
+          <li onClick={this.props.createHandler}><i className="material-icons delete-section-button">add</i></li>
+        }
+        {sections}
+      </ul>
     )
   }
 }

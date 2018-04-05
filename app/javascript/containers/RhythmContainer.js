@@ -29,7 +29,7 @@ class RhythmContainer extends Component {
       )
     })
     return (
-      <ul className='rhythm-table'>
+      <ul className='rhythm-container'>
         {
           this.props.createHandler &&
           <form onSubmit={this.props.createHandler} id="rhythm-form">
