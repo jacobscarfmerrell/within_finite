@@ -1,14 +1,12 @@
 import Tone from 'tone';
 
-const tones = ['=R','-2','+2','-3','+3','-4','=T','+5','-6','+6','-7','+7'];
-
 function seedChord(id) {
   return(
     {
       id: id,
       root: Tone.Frequency('A3'),
       synth: new Tone.PolySynth(8, Tone.Synth).toMaster(),
-      intervals: [0],
+      intervals: [],
       partials: [
           1.0, 0.0, 0.0, 0.0,
           0.0, 0.0, 0.0, 0.0,

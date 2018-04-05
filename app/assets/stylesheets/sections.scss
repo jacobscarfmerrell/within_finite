@@ -45,6 +45,7 @@ body {
 
 #tempo-slider-label {
   margin-right: 10px;
+  letter-spacing: 2px;
 }
 
 #tempo-slider-input {
@@ -128,8 +129,13 @@ button {
 
 .note-checkbox {
   list-style: none;
-  border: 1px solid black;
-  padding: 1px;
+  background-color: #fdd4f6;
+  border: none;
+  border-radius: 90px;
+  padding: 20px;
+  margin: 5px;
+  font-family: garamond, serif;
+  color: black;
 }
 
 .note-container {
