@@ -376,13 +376,19 @@ class App extends Component {
     if (view == 'sectionRhythm' && selectedSectionId == null) {
       ascend_disabled = true
     }
+    let play_pause;
+    if (this.state.playing) {
+      play_pause = 'pause_circle_outline';
+    } else {
+      play_pause = 'play_circle_outline'
+    }
     return (
       <div>
         <div id="app-toolbar">
           <AscendButton handleClick={this.handleAscend} disable={ascend_disabled} />
           <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent ">
             <label className="mdl-icon-toggle mdl-js-icon-toggle" htmlFor="switch-1">
-              <i className="mdl-icon-toggle__label material-icons md-light" id="switch-1-icon">play_circle_outline</i>
+              <i className="mdl-icon-toggle__label material-icons md-light" id="switch-1-icon">{play_pause}</i>
               <input type="checkbox" id="switch-1" className="mdl-icon-toggle__input" onClick={this.loopToggle} />
             </label>
           </button>
