@@ -9,7 +9,7 @@ const RhythmTile = props => {
     }
     stepLis.push(
       <li className={liClassName} key={i} id={`${props.id}`+'-'+`${i}`} onClick={props.handleClick}>
-        {i}
+        {i} <span className="tiny-font">/ {props.divisor}</span>
       </li>
     );
   }
