@@ -2,14 +2,122 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  background-color: #ecfbfe;
+}
+
+input[type=range].partial-sliders {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6.3px 0;
+}
+input[type=range].partial-sliders:focus {
+  outline: none;
+}
+input[type=range].partial-sliders::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #46262c;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+input[type=range].partial-sliders::-webkit-slider-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.3px;
+}
+input[type=range].partial-sliders:focus::-webkit-slider-runnable-track {
+  background: #502b32;
+}
+input[type=range].partial-sliders::-moz-range-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #46262c;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+input[type=range].partial-sliders::-moz-range-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+}
+input[type=range].partial-sliders::-ms-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].partial-sliders::-ms-fill-lower {
+  background: #3c2126;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].partial-sliders::-ms-fill-upper {
+  background: #46262c;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].partial-sliders::-ms-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+  height: 1.4px;
+}
+input[type=range].partial-sliders:focus::-ms-fill-lower {
+  background: #46262c;
+}
+input[type=range].partial-sliders:focus::-ms-fill-upper {
+  background: #502b32;
+}
+
+
+.mdc-toolbar__title {
+  margin-left: 40px;
+  font-family: garamond, serif;
+  background-color: #ecfbfe;
+  font-size: 1.39em;
+}
+
 #app {
-  margin: 1em 4em 1em 4em;
+  margin: 1em 7% 1em 7%;
 }
 
 #children {
-  border-top: 2px solid black;
-  border-radius: 3px;
-  padding: 1em;
+  border-top: 0.15em solid black;
+  border-bottom: 0.15em solid black;
+  border-radius: 2px;
+  padding: 1.4em;
+  background-color: #b582b5;
+  box-shadow: inset 0.0em -0.4em 1em 0.8em #ecfbfe;
+  border-radius: 20px;
+}
+
+hr {
+  border : 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
 #app-toolbar {
@@ -22,21 +130,38 @@
   flex: 1;
   text-align: right;
   width: 75%;
+  font-family: garamond, serif;
+  color: #ecfbfe;
+  margin: 0px 10px 10px 30% ;
+}
 
+#tempo-slider-label {
+  margin-right: 10px;
+  letter-spacing: 2px;
+}
+
+#tempo-slider-input {
+  background-color: #ecfbfe;
+  color: pink;
 }
 
 #app-views {
-  border: 3px solid black;
+  background-color: #feecfb;
+  border-color: darken(purple, 4%);
+  border-style: outset;
+  border-width: 2px;
+  margin-top: 5px;
   border-radius: 5px;
   padding: 0.5em;
 }
 
 #switch-1-icon {
-  font-size: 50px;
+  font-size: 30px;
+  color: #fdb4cd;
 }
 
-.mdc-toolbar__title {
-  font-family: garamond, serif;
+#ascend {
+  margin-left: 10px;
 }
 
 label {
@@ -70,17 +195,25 @@ button {
 }
 
 .section-container {
-  border: none;
+  display: table-row;
+  list-style: none;
 }
 
-.rhythm-table {
+.section-row {
+  display: table-cell;
+}
+
+.rhythm-container {
   width: 80%;
   display: table;
 }
 
 #rhythm-form {
-  width: 70px;
+  width: 50px;
   display: inline-flex;
+  border: none;
+  border-bottom: solid black 2px;
+  border-radius: 8px;
 }
 
 .rhythm-row {
@@ -93,8 +226,13 @@ button {
 
 .note-checkbox {
   list-style: none;
-  border: 1px solid black;
-  padding: 1px;
+  background-color: #fdd4f6;
+  border: none;
+  border-radius: 90px;
+  padding: 20px;
+  margin: 5px;
+  font-family: garamond, serif;
+  color: black;
 }
 
 .note-container {

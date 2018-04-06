@@ -6,7 +6,7 @@ const NoteTile = props => {
     return(
       <div key={index}>
         <label htmlFor={index}>{index+1}</label>
-        <input className="mdl-slider mdl-js-slider" onChange={props.handleChange} type="range" id={index} defaultValue={partial} min='0.0' max='1.0' step="0.001"/>
+        <input className="partial-sliders" onChange={props.handleChange} type="range" id={index} defaultValue={partial} min='0.0' max='1.0' step="0.001"/>
       </div>
     )
   })
