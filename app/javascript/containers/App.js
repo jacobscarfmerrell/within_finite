@@ -315,7 +315,7 @@ class App extends Component {
           selectedSection={app.sections[selectedSectionId-1]}
         />
         <hr/>
-        <h3>Rhythms</h3>
+        <h3>Steps</h3>
         <RhythmContainer
           createHandler={this.createRhythm}
           deleteHandler={this.deleteRhythm}
