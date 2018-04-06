@@ -232,6 +232,7 @@ class App extends Component {
       }
     }
     else { this.setupRhythms(null) }
+
     if (this.state.view=='sectionRhythm' &&
     this.state.selectedSectionId == null) {
       document.getElementById("ascend").disabled = false;

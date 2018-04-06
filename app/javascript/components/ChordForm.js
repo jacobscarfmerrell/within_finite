@@ -10,21 +10,22 @@ const ChordForm = props => {
       checked = true;
     }
     return(
-        <div key={interval} className="note-container">
-          <fieldset className="note-checkbox">
+        <div key={interval} className="note-inner-container">
+          <fieldset className={"note-checkbox note-checkbox-"+toneIndices[index]}>
             <input id={toneIndices[index]} type="checkbox" name={'checkbox'+toneIndices[index]} defaultChecked={checked} />
-            <label htmlFor={toneIndices[index]}>
+            <label htmlFor={toneIndices[index]} className={"note-checkbox note-checkbox-"+toneIndices[index]}>
               <span>{interval}</span>
             </label>
           </fieldset>
-
         </div>
     )
   })
   return(
     <form className='note-container' id={props.id} onSubmit={props.handleDescend}>
       {intervalButtons}
-      <button type="submit"><i className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent material-icons">input</i></button>
+      <div>
+        <button type="submit"><i className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent material-icons">save</i></button>
+      </div>
     </form>
   )
 }
