@@ -2425,20 +2425,20 @@ button, .button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  padding: 1rem 2rem 1.0625rem 2rem;
+  padding: 0 0 0.0625rem 0;
   font-size: 1rem;
-  background-color: #008CBA;
-  border-color: #007095;
-  color: #FFFFFF;
+  background-color: #FEECFB;
+  border-color: #FEECFB;
+  color: #333333;
   transition: background-color 300ms ease-out;
 }
 /* line 163, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button:hover, button:focus, .button:hover, .button:focus {
-  background-color: #007095;
+  background-color: #FEECFB;
 }
 /* line 169, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button:hover, button:focus, .button:hover, .button:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 225, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.secondary, .button.secondary {
@@ -2527,12 +2527,12 @@ button.tiny, .button.tiny {
 }
 /* line 234, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.expand, .button.expand {
-  padding: 1rem 2rem 1.0625rem 2rem;
+  padding: 0 0 0.0625rem 0;
   font-size: 1rem;
-  padding-bottom: 1.0625rem;
-  padding-top: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-bottom: 0.0625rem;
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
   width: 100%;
 }
 /* line 236, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
@@ -2555,24 +2555,24 @@ button.round, .button.round {
 }
 /* line 242, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.disabled, button[disabled], .button.disabled, .button[disabled] {
-  background-color: #008CBA;
-  border-color: #007095;
-  color: #FFFFFF;
+  background-color: #FEECFB;
+  border-color: #FEECFB;
+  color: #333333;
   box-shadow: none;
   cursor: default;
   opacity: 0.7;
 }
 /* line 163, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  background-color: #007095;
+  background-color: #FEECFB;
 }
 /* line 169, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  color: #FFFFFF;
+  color: #333333;
 }
 /* line 180, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.disabled:hover, button.disabled:focus, button[disabled]:hover, button[disabled]:focus, .button.disabled:hover, .button.disabled:focus, .button[disabled]:hover, .button[disabled]:focus {
-  background-color: #008CBA;
+  background-color: #FEECFB;
 }
 /* line 243, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_buttons.scss */
 button.disabled.secondary, button[disabled].secondary, .button.disabled.secondary, .button[disabled].secondary {
@@ -3182,17 +3182,17 @@ button::-moz-focus-inner {
 }
 /* line 125, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_button-groups.scss */
 .button-group.round.stack > *:first-child, .button-group.round.stack > *:first-child > a, .button-group.round.stack > *:first-child > button, .button-group.round.stack > *:first-child > .button {
-  -webkit-top-left-radius: 1rem;
-  -webkit-top-right-radius: 1rem;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  -webkit-top-left-radius: 0;
+  -webkit-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 /* line 136, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_button-groups.scss */
 .button-group.round.stack > *:last-child, .button-group.round.stack > *:last-child > a, .button-group.round.stack > *:last-child > button, .button-group.round.stack > *:last-child > .button {
-  -webkit-bottom-left-radius: 1rem;
-  -webkit-bottom-right-radius: 1rem;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
+  -webkit-bottom-left-radius: 0;
+  -webkit-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 @media only screen and (min-width: 40.0625em) {
   /* line 193, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_button-groups.scss */
@@ -3271,17 +3271,17 @@ button::-moz-focus-inner {
   }
   /* line 125, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_button-groups.scss */
   .button-group.round.stack-for-small > *:first-child, .button-group.round.stack-for-small > *:first-child > a, .button-group.round.stack-for-small > *:first-child > button, .button-group.round.stack-for-small > *:first-child > .button {
-    -webkit-top-left-radius: 1rem;
-    -webkit-top-right-radius: 1rem;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    -webkit-top-left-radius: 0;
+    -webkit-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
   /* line 136, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_button-groups.scss */
   .button-group.round.stack-for-small > *:last-child, .button-group.round.stack-for-small > *:last-child > a, .button-group.round.stack-for-small > *:last-child > button, .button-group.round.stack-for-small > *:last-child > .button {
-    -webkit-bottom-left-radius: 1rem;
-    -webkit-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    -webkit-bottom-left-radius: 0;
+    -webkit-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
 
@@ -7951,7 +7951,7 @@ p aside {
 /* line 255, /Users/mostlytoes/.gem/ruby/2.3.3/gems/foundation-rails-5.5.3.2/vendor/assets/stylesheets/foundation/components/_type.scss */
 h1, h2, h3, h4, h5, h6 {
   color: #222222;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: garamond, serif;
   font-style: normal;
   font-weight: normal;
   line-height: 1.4;
@@ -8052,7 +8052,7 @@ code {
 ul,
 ol,
 dl {
-  font-family: inherit;
+  font-family: garamond, serif;
   font-size: 1rem;
   line-height: 1.6;
   list-style-position: outside;
@@ -9735,620 +9735,292 @@ th.hide-for-touch {
     display: table-cell !important;
   }
 }
-@keyframes mdc-ripple-fg-radius-in {
-  from {
-    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translate(var(--mdc-ripple-fg-translate-start, 0)) scale(1);
-  }
-  to {
-    transform: translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1));
-  }
-}
-@keyframes mdc-ripple-fg-opacity-in {
-  from {
-    animation-timing-function: linear;
-    opacity: 0;
-  }
-  to {
-    opacity: var(--mdc-ripple-fg-opacity, 0);
-  }
-}
-@keyframes mdc-ripple-fg-opacity-out {
-  from {
-    animation-timing-function: linear;
-    opacity: var(--mdc-ripple-fg-opacity, 0);
-  }
-  to {
-    opacity: 0;
-  }
-}
-/* line 35, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/common.scss */
-.mdc-ripple-surface--test-edge-var-bug {
-  --mdc-ripple-surface-test-edge-var: 1px solid #000;
-  visibility: hidden;
-}
-/* line 40, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/common.scss */
-.mdc-ripple-surface--test-edge-var-bug::before {
-  border: var(--mdc-ripple-surface-test-edge-var);
+@charset "UTF-8";
+/* line 5, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+body {
+  background-color: #ecfbfe;
 }
 
-/**
- * The css property used for elevation. In most cases this should not be changed. It is exposed
- * as a variable for abstraction / easy use when needing to reference the property directly, for
- * example in a `will-change` rule.
- */
-/**
- * The default duration value for elevation transitions.
- */
-/**
- * The default easing value for elevation transitions.
- */
-/**
- * Applies the correct CSS rules to an element to give it the elevation specified by $z-value.
- * The $z-value must be between 0 and 24.
- * If $color has an alpha channel, it will be ignored and overridden. To increase the opacity of the shadow, use
- * $opacity-boost.
- */
-/**
- * Returns a string that can be used as the value for a `transition` property for elevation.
- * Calling this function directly is useful in situations where a component needs to transition
- * more than one property.
- *
- * ```scss
- * .foo {
- *   transition: mdc-elevation-transition-value(), opacity 100ms ease;
- *   will-change: $mdc-elevation-property, opacity;
- * }
- * ```
- */
-/**
- * Creates a rule that will be applied when an MDC Web component is within the context of an RTL layout.
- *
- * Usage Example:
- * ```scss
- * .mdc-foo {
- *   position: absolute;
- *   left: 0;
- *
- *   @include mdc-rtl {
- *     left: auto;
- *     right: 0;
- *   }
- *
- *   &__bar {
- *     margin-left: 4px;
- *     @include mdc-rtl(".mdc-foo") {
- *       margin-left: auto;
- *       margin-right: 4px;
- *     }
- *   }
- * }
- *
- * .mdc-foo--mod {
- *   padding-left: 4px;
- *
- *   @include mdc-rtl {
- *     padding-left: auto;
- *     padding-right: 4px;
- *   }
- * }
- * ```
- *
- * Note that this works by checking for [dir="rtl"] on an ancestor element. While this will work
- * in most cases, it will in some cases lead to false negatives, e.g.
- *
- * ```html
- * <html dir="rtl">
- *   <!-- ... -->
- *   <div dir="ltr">
- *     <div class="mdc-foo">Styled incorrectly as RTL!</div>
- *   </div>
- * </html>
- * ```
- *
- * In the future, selectors such as :dir (http://mdn.io/:dir) will help us mitigate this.
- */
-/**
- * Takes a base box-model property - e.g. margin / border / padding - along with a default
- * direction and value, and emits rules which apply the value to the
- * "<base-property>-<default-direction>" property by default, but flips the direction
- * when within an RTL context.
- *
- * For example:
- *
- * ```scss
- * .mdc-foo {
- *   @include mdc-rtl-reflexive-box(margin, left, 8px);
- * }
- * ```
- * is equivalent to:
- *
- * ```scss
- * .mdc-foo {
- *   margin-left: 8px;
- *
- *   @include mdc-rtl {
- *     margin-right: 8px;
- *     margin-left: 0;
- *   }
- * }
- * ```
- * whereas:
- *
- * ```scss
- * .mdc-foo {
- *   @include mdc-rtl-reflexive-box(margin, right, 8px);
- * }
- * ```
- * is equivalent to:
- *
- * ```scss
- * .mdc-foo {
- *   margin-right: 8px;
- *
- *   @include mdc-rtl {
- *     margin-right: 0;
- *     margin-left: 8px;
- *   }
- * }
- * ```
- *
- * You can also pass a 4th optional $root-selector argument which will be forwarded to `mdc-rtl`,
- * e.g. `@include mdc-rtl-reflexive-box(margin, left, 8px, ".mdc-component")`.
- *
- * Note that this function will always zero out the original value in an RTL context. If you're
- * trying to flip the values, use mdc-rtl-reflexive-property().
- */
-/**
- * Takes a base property and emits rules that assign <base-property>-left to <left-value> and
- * <base-property>-right to <right-value> in a LTR context, and vice versa in a RTL context.
- * For example:
- *
- * ```scss
- * .mdc-foo {
- *   @include mdc-rtl-reflexive-property(margin, auto, 12px);
- * }
- * ```
- * is equivalent to:
- *
- * ```scss
- * .mdc-foo {
- *   margin-left: auto;
- *   margin-right: 12px;
- *
- *   @include mdc-rtl {
- *     margin-left: 12px;
- *     margin-right: auto;
- *   }
- * }
- * ```
- *
- * A 4th optional $root-selector argument can be given, which will be passed to `mdc-rtl`.
- */
-/**
- * Takes an argument specifying a horizontal position property (either "left" or "right") as well
- * as a value, and applies that value to the specified position in a LTR context, and flips it in a
- * RTL context. For example:
- *
- * ```scss
- * .mdc-foo {
- *   @include mdc-rtl-reflexive-position(left, 0);
- *   position: absolute;
- * }
- * ```
- * is equivalent to:
- *
- * ```scss
- *  .mdc-foo {
- *    position: absolute;
- *    left: 0;
- *    right: initial;
- *
- *    @include mdc-rtl {
- *      right: 0;
- *      left: initial;
- *    }
- *  }
- * ```
- * An optional third $root-selector argument may also be given, which is passed to `mdc-rtl`.
- */
-/* TODO(sgomes): Figure out what to do about desktop font sizes. */
-/* TODO(sgomes): Figure out what to do about i18n and i18n font sizes. */
-/* line 23, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/mdc-button.scss */
-.mdc-button {
-  font-family: Roboto, sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-size: 0.875rem;
-  line-height: 2.25rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-  text-transform: uppercase;
-  --mdc-ripple-fg-size: 0;
-  --mdc-ripple-left: 0;
-  --mdc-ripple-top: 0;
-  --mdc-ripple-fg-scale: 1;
-  --mdc-ripple-fg-translate-end: 0;
-  --mdc-ripple-fg-translate-start: 0;
-  -webkit-tap-highlight-color: transparent;
-  will-change: transform, opacity;
-  display: inline-block;
-  position: relative;
-  box-sizing: border-box;
-  min-width: 64px;
-  height: 36px;
-  padding: 0 16px;
-  border: none;
-  outline: none;
-  text-align: center;
-  user-select: none;
+/* line 9, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders {
   -webkit-appearance: none;
-  overflow: hidden;
-  vertical-align: middle;
-  border-radius: 2px;
+  width: 100%;
+  margin: 6.3px 0;
 }
-/* line 33, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button::before, .mdc-button::after {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0;
-  pointer-events: none;
-  content: "";
-}
-/* line 42, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button::before {
-  transition: opacity 15ms linear;
-  z-index: 1;
-}
-/* line 49, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded::before {
-  transform: scale(var(--mdc-ripple-fg-scale, 1));
-}
-/* line 53, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded::after {
-  top: 0;
-  /* @noflip */
-  left: 0;
-  transform: scale(0);
-  transform-origin: center center;
-}
-/* line 62, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded--unbounded::after {
-  top: var(--mdc-ripple-top, 0);
-  /* @noflip */
-  left: var(--mdc-ripple-left, 0);
-}
-/* line 69, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded--foreground-activation::after {
-  animation: 225ms mdc-ripple-fg-radius-in forwards, 75ms mdc-ripple-fg-opacity-in forwards;
-}
-/* line 75, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded--foreground-deactivation::after {
-  animation: 150ms mdc-ripple-fg-opacity-out;
-  transform: translate(var(--mdc-ripple-fg-translate-end, 0)) scale(var(--mdc-ripple-fg-scale, 1));
-}
-/* line 177, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button::before, .mdc-button::after {
-  top: calc(50% - 100%);
-  /* @noflip */
-  left: calc(50% - 100%);
-  width: 200%;
-  height: 200%;
-}
-/* line 187, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded::after {
-  width: var(--mdc-ripple-fg-size, 100%);
-  height: var(--mdc-ripple-fg-size, 100%);
-}
-/* line 106, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button::-moz-focus-inner {
-  padding: 0;
-  border: 0;
-}
-/* line 112, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button:active {
+
+/* line 14, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders:focus {
   outline: none;
 }
-/* line 116, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button:hover {
+
+/* line 17, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #46262c;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+
+/* line 26, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-webkit-slider-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.3px;
+}
+
+/* line 37, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders:focus::-webkit-slider-runnable-track {
+  background: #502b32;
+}
+
+/* line 40, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-moz-range-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #46262c;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+
+/* line 49, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-moz-range-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
   cursor: pointer;
 }
-/* line 120, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button:disabled {
-  background-color: transparent;
-  color: rgba(0, 0, 0, 0.38);
-  /* @alternate */
-  color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));
-  cursor: default;
-  pointer-events: none;
-}
-/* line 42, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button:not(:disabled) {
-  background-color: transparent;
-}
-/* line 60, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button:not(:disabled) {
-  color: #6200ee;
-  /* @alternate */
-  color: var(--mdc-theme-primary, #6200ee);
-}
-/* line 86, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button::before, .mdc-button::after {
-  background-color: #6200ee;
-}
-@supports not (-ms-ime-align: auto) {
-  /* line 66, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/theme/_mixins.scss */
-  .mdc-button::before, .mdc-button::after {
-    /* @alternate */
-    background-color: var(--mdc-theme-primary, #6200ee);
-  }
-}
-/* line 94, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button:hover::before {
-  opacity: 0.04;
-}
-/* line 111, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button:not(.mdc-ripple-upgraded):focus::before, .mdc-button.mdc-ripple-upgraded--background-focused::before {
-  transition-duration: 75ms;
-  opacity: 0.12;
-}
-/* line 124, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button:not(.mdc-ripple-upgraded)::after {
-  transition: opacity 150ms linear;
-}
-/* line 128, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button:not(.mdc-ripple-upgraded):active::after {
-  transition-duration: 75ms;
-  opacity: 0.16;
-}
-/* line 134, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button.mdc-ripple-upgraded {
-  --mdc-ripple-fg-opacity: 0.16;
-}
-/* line 34, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/mdc-button.scss */
-.mdc-button .mdc-button__icon {
-  /* @noflip */
-  margin-left: 0;
-  /* @noflip */
-  margin-right: 8px;
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  font-size: 18px;
-  line-height: inherit;
-  vertical-align: top;
-}
-/* line 73, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/rtl/_mixins.scss */
-[dir="rtl"] .mdc-button .mdc-button__icon, .mdc-button .mdc-button__icon[dir="rtl"] {
-  /* @noflip */
-  margin-left: 8px;
-  /* @noflip */
-  margin-right: 0;
-}
-/* line 39, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/mdc-button.scss */
-.mdc-button svg.mdc-button__icon {
-  /* @noflip */
-  margin-left: 0;
-  /* @noflip */
-  margin-right: 8px;
-  margin-top: -2px;
-  fill: currentColor;
-  vertical-align: middle;
-}
-/* line 73, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/rtl/_mixins.scss */
-[dir="rtl"] .mdc-button svg.mdc-button__icon, .mdc-button svg.mdc-button__icon[dir="rtl"] {
-  /* @noflip */
-  margin-left: 8px;
-  /* @noflip */
-  margin-right: 0;
+
+/* line 58, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-ms-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
 }
 
-/* line 157, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--raised:disabled,
-.mdc-button--unelevated:disabled {
-  background-color: rgba(0, 0, 0, 0.12);
-  color: rgba(0, 0, 0, 0.38);
-  /* @alternate */
-  color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));
-}
-/* line 42, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--raised:not(:disabled),
-.mdc-button--unelevated:not(:disabled) {
-  background-color: #6200ee;
-}
-@supports not (-ms-ime-align: auto) {
-  /* line 66, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/theme/_mixins.scss */
-  .mdc-button--raised:not(:disabled),
-  .mdc-button--unelevated:not(:disabled) {
-    /* @alternate */
-    background-color: var(--mdc-theme-primary, #6200ee);
-  }
-}
-/* line 60, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--raised:not(:disabled),
-.mdc-button--unelevated:not(:disabled) {
-  color: white;
-  /* @alternate */
-  color: var(--mdc-theme-text-primary-on-primary, white);
-}
-/* line 86, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button--raised::before, .mdc-button--raised::after,
-.mdc-button--unelevated::before,
-.mdc-button--unelevated::after {
-  background-color: white;
-}
-@supports not (-ms-ime-align: auto) {
-  /* line 66, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/theme/_mixins.scss */
-  .mdc-button--raised::before, .mdc-button--raised::after,
-  .mdc-button--unelevated::before,
-  .mdc-button--unelevated::after {
-    /* @alternate */
-    background-color: var(--mdc-theme-text-primary-on-primary, white);
-  }
-}
-/* line 94, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button--raised:hover::before,
-.mdc-button--unelevated:hover::before {
-  opacity: 0.08;
-}
-/* line 111, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button--raised:not(.mdc-ripple-upgraded):focus::before, .mdc-button--raised.mdc-ripple-upgraded--background-focused::before,
-.mdc-button--unelevated:not(.mdc-ripple-upgraded):focus::before,
-.mdc-button--unelevated.mdc-ripple-upgraded--background-focused::before {
-  transition-duration: 75ms;
-  opacity: 0.24;
-}
-/* line 124, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button--raised:not(.mdc-ripple-upgraded)::after,
-.mdc-button--unelevated:not(.mdc-ripple-upgraded)::after {
-  transition: opacity 150ms linear;
-}
-/* line 128, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button--raised:not(.mdc-ripple-upgraded):active::after,
-.mdc-button--unelevated:not(.mdc-ripple-upgraded):active::after {
-  transition-duration: 75ms;
-  opacity: 0.32;
-}
-/* line 134, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.mdc-button--raised.mdc-ripple-upgraded,
-.mdc-button--unelevated.mdc-ripple-upgraded {
-  --mdc-ripple-fg-opacity: 0.32;
+/* line 66, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-ms-fill-lower {
+  background: #3c2126;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 
-/* line 52, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/mdc-button.scss */
-.mdc-button--raised {
-  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-/* line 168, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--raised:hover, .mdc-button--raised:focus {
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-}
-/* line 173, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--raised:active {
-  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-}
-/* line 177, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--raised:disabled {
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2), 0px 0px 0px 0px rgba(0, 0, 0, 0.14), 0px 0px 0px 0px rgba(0, 0, 0, 0.12);
+/* line 72, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-ms-fill-upper {
+  background: #46262c;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 
-/* line 56, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/mdc-button.scss */
-.mdc-button--stroked {
-  border-style: solid;
-  padding-right: 14px;
-  padding-left: 14px;
+/* line 78, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders::-ms-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+  height: 1.4px;
+}
+
+/* line 88, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders:focus::-ms-fill-lower {
+  background: #46262c;
+}
+
+/* line 91, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+input[type=range].partial-sliders:focus::-ms-fill-upper {
+  background: #502b32;
+}
+
+/* line 96, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.mdc-toolbar__title {
+  margin-left: 40px;
+  font-family: garamond, serif;
+  background-color: #ecfbfe;
+  font-size: 1.39em;
+}
+
+/* line 103, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#app {
+  margin: 1em 7% 1em 7%;
+}
+
+/* line 107, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#children {
+  border-top: 0.15em solid black;
+  border-bottom: 0.15em solid black;
+  border-radius: 2px;
+  padding: 1.4em;
+  background-color: #b582b5;
+  box-shadow: inset 0.0em -0.4em 1em 0.8em #ecfbfe;
+  border-radius: 20px;
+}
+
+/* line 117, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.75), transparent);
+}
+
+/* line 123, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#app-toolbar {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+/* line 129, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#tempo-slider {
+  flex: 1;
+  text-align: right;
+  width: 75%;
+  font-family: garamond, serif;
+  color: #ecfbfe;
+  margin: 0px 10px 10px 30%;
+}
+
+/* line 138, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#tempo-slider-label {
+  margin-right: 10px;
+  letter-spacing: 2px;
+}
+
+/* line 143, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#tempo-slider-input {
+  background-color: #ecfbfe;
+  color: pink;
+}
+
+/* line 148, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#app-views {
+  background-color: #feecfb;
+  border-color: #6c006c;
+  border-style: outset;
   border-width: 2px;
-  line-height: 32px;
-}
-/* line 151, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--stroked:disabled {
-  border-color: rgba(0, 0, 0, 0.38);
-  /* @alternate */
-  border-color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));
-}
-/* line 81, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--stroked.mdc-button--dense {
-  line-height: 27px;
-}
-/* line 48, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.mdc-button--stroked:not(:disabled) {
-  border-color: #6200ee;
-  /* @alternate */
-  border-color: var(--mdc-theme-primary, #6200ee);
+  margin-top: 5px;
+  border-radius: 5px;
+  padding: 0.5em;
 }
 
-/* line 62, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/mdc-button.scss */
-.mdc-button--dense {
-  height: 32px;
-  font-size: .8125rem;
-  line-height: 32px;
+/* line 158, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#switch-1-icon {
+  font-size: 30px;
+  color: #fdb4cd;
 }
 
-/* line 60, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/button/_mixins.scss */
-.foo-button:not(:disabled) {
-  color: teal;
-}
-/* line 86, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.foo-button::before, .foo-button::after {
-  background-color: teal;
-}
-/* line 94, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.foo-button:hover::before {
-  opacity: 0.04;
-}
-/* line 111, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.foo-button:not(.mdc-ripple-upgraded):focus::before, .foo-button.mdc-ripple-upgraded--background-focused::before {
-  transition-duration: 75ms;
-  opacity: 0.12;
-}
-/* line 124, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.foo-button:not(.mdc-ripple-upgraded)::after {
-  transition: opacity 150ms linear;
-}
-/* line 128, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.foo-button:not(.mdc-ripple-upgraded):active::after {
-  transition-duration: 75ms;
-  opacity: 0.16;
-}
-/* line 134, /Users/mostlytoes/challenges/breakable_toy/within_finite/node_modules/@material/ripple/_mixins.scss */
-.foo-button.mdc-ripple-upgraded {
-  --mdc-ripple-fg-opacity: 0.16;
+/* line 163, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#ascend {
+  margin-left: 10px;
 }
 
-/* line 12, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 167, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+label {
+  display: inline-block;
+  text-align: right;
+}
+
+/* line 170, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+​
+button {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* line 177, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.delete-section-button {
+  margin-left: 3px;
+  font-size: 18px;
+  display: inline;
+  background-color: pink;
+  border-radius: 8px;
+}
+
+/* line 185, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.add-rhythm-button {
+  margin-left: 3px;
+  font-size: 18px;
+  display: inline;
+  background-color: pink;
+  border-radius: 8px;
+}
+
+/* line 193, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .selected {
-  font-weight: bold;
+  border: 2px solid black;
 }
 
-/* line 16, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 197, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .section-container {
-  border: none;
+  display: table-row;
+  list-style: none;
 }
 
-/* line 20, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
-.section-tile {
-  padding: 0.2em;
-  border: 2px solid;
-  border-radius: 3px;
-  margin: 2px;
-  width: 80%;
+/* line 202, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.section-row {
+  display: table-cell;
 }
 
-/* line 28, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
-.rhythm-table {
+/* line 206, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.rhythm-container {
   width: 80%;
   display: table;
 }
 
-/* line 33, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 211, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+#rhythm-form {
+  width: 50px;
+  display: inline-flex;
+  border: none;
+  border-bottom: solid black 2px;
+  border-radius: 8px;
+}
+
+/* line 219, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .rhythm-row {
   width: 80%;
   display: table-row;
 }
 
-/* line 38, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
-.rhythm-tile {
-  list-style: none;
-  display: table-cell;
-  border: 1px solid black;
-}
-
-/* line 44, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 227, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-checkbox {
   list-style: none;
-  border: 1px solid black;
-  padding: 2px;
+  background-color: #fdd4f6;
+  border: none;
+  border-radius: 90px;
+  padding: 20px;
+  margin: 5px;
+  font-family: garamond, serif;
+  color: black;
 }
 
-/* line 50, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 238, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-container {
   list-style: none;
-  display: inline-flex;
+  display: inline-block;
 }
 
-/* line 55, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 243, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-cell {
   list-style: none;
   border: 1px solid black;
