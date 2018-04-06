@@ -6,6 +6,93 @@ body {
   background-color: #ecfbfe;
 }
 
+input[type=range].partial-sliders {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6.3px 0;
+}
+input[type=range].partial-sliders:focus {
+  outline: none;
+}
+input[type=range].partial-sliders::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #46262c;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+input[type=range].partial-sliders::-webkit-slider-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.3px;
+}
+input[type=range].partial-sliders:focus::-webkit-slider-runnable-track {
+  background: #502b32;
+}
+input[type=range].partial-sliders::-moz-range-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #46262c;
+  border-radius: 0px;
+  border: 0px solid #010101;
+}
+input[type=range].partial-sliders::-moz-range-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+}
+input[type=range].partial-sliders::-ms-track {
+  width: 100%;
+  height: 1.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].partial-sliders::-ms-fill-lower {
+  background: #3c2126;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].partial-sliders::-ms-fill-upper {
+  background: #46262c;
+  border: 0px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range].partial-sliders::-ms-thumb {
+  box-shadow: 1.8px 1.8px 5.9px rgba(207, 18, 205, 0.49), 0px 0px 1.8px rgba(230, 20, 228, 0.49);
+  border: 2.9px solid #401e00;
+  height: 14px;
+  width: 26px;
+  border-radius: 43px;
+  background: #8292ff;
+  cursor: pointer;
+  height: 1.4px;
+}
+input[type=range].partial-sliders:focus::-ms-fill-lower {
+  background: #46262c;
+}
+input[type=range].partial-sliders:focus::-ms-fill-upper {
+  background: #502b32;
+}
+
+
 .mdc-toolbar__title {
   margin-left: 40px;
   font-family: garamond, serif;
@@ -14,7 +101,7 @@ body {
 }
 
 #app {
-  margin: 1em 4em 1em 4em;
+  margin: 1em 7% 1em 7%;
 }
 
 #children {

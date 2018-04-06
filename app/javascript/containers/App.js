@@ -175,17 +175,19 @@ class App extends Component {
   deleteRhythm(e) {
     let currentSectionIndex = this.state.selectedSectionId-1;
     let app = Object.assign({},this.state.app);
-    let rhythms = app.sections[currentSectionIndex].rhythms;
-
+    let rhythms = Object.assign([],app.sections[currentSectionIndex].rhythms);
     let index = 0;
     for (let i=0; i<rhythms.length; i++) {
       if (rhythms[i].id === Number(e.target.id)) {
-        rhythms[i].sequence.removeAll();
         index = i;
       } else if (index != 0) {
         rhythms[i].id -= 1;
       }
     }
+    if (Object.getOwnPropertyNames(rhythms[index].sequence).length == 0) {
+      this.setupRhythms(null);
+    }
+    rhythms[index].sequence.removeAll();
     rhythms.splice(index,1);
     app.sections[currentSectionIndex].rhythms = rhythms;
     this.setState({ app });

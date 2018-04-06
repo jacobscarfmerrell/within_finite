@@ -14,7 +14,7 @@ const ChordTile = props => {
   })
   if (chordRow.length == 0) {
     chordRow.push(
-      <li className="note-cell mdl-button mdl-button--raised mdl-button--accent ">None</li>
+      <li key="noChord" className="note-cell mdl-button mdl-button--raised mdl-button--accent ">None</li>
     )
   }
   return(
