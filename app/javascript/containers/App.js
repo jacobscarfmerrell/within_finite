@@ -248,6 +248,7 @@ class App extends Component {
         selectedChordId: this.state.app.sections[this.state.selectedSectionId-1].rhythms[Number(splitId[0])-1].chords[Number(splitId[1])-1].id
       });
     }
+    
     else if (this.state.view == 'rhythmChord' &&
     this.state.selectedRhythmId == null) {
       let splitId = e.target.id.split('-');
