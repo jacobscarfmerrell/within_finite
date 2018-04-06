@@ -10012,7 +10012,7 @@ button {
   list-style: none;
   background-color: #fdd4f6;
   border: none;
-  border-radius: 90px;
+  border-radius: 180px;
   padding: 20px;
   margin: 5px;
   font-family: garamond, serif;
@@ -10020,12 +10020,30 @@ button {
 }
 
 /* line 242, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
-.note-container {
-  list-style: none;
-  display: inline-block;
+.note-checkbox-0, .note-checkbox-12 {
+  background-color: black;
+  color: white;
 }
 
 /* line 247, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.note-checkbox-1, .note-checkbox-3, .note-checkbox-8, .note-checkbox-10, .note-checkbox-13, .note-checkbox-15, .note-checkbox-17, .note-checkbox-20 {
+  background-color: lightblue;
+  color: black;
+}
+
+/* line 252, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.note-checkbox-5, .note-checkbox-6, .note-checkbox-7, .note-checkbox-17, .note-checkbox-18 {
+  background-color: white;
+  color: black;
+}
+
+/* line 257, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.note-inner-container {
+  list-style: none;
+  display: inline-flex;
+}
+
+/* line 263, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-cell {
   list-style: none;
   border: 1px solid black;
