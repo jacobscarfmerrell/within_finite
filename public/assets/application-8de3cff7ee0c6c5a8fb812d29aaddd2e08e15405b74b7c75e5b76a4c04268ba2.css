@@ -9948,6 +9948,11 @@ button {
 }
 
 /* line 177, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+.tiny-font {
+  font-size: 0.6em;
+}
+
+/* line 181, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .delete-section-button {
   margin-left: 3px;
   font-size: 18px;
@@ -9956,7 +9961,7 @@ button {
   border-radius: 8px;
 }
 
-/* line 185, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 189, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .add-rhythm-button {
   margin-left: 3px;
   font-size: 18px;
@@ -9965,29 +9970,29 @@ button {
   border-radius: 8px;
 }
 
-/* line 193, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 197, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .selected {
   border: 2px solid black;
 }
 
-/* line 197, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 201, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .section-container {
   display: table-row;
   list-style: none;
 }
 
-/* line 202, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 206, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .section-row {
   display: table-cell;
 }
 
-/* line 206, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 210, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .rhythm-container {
   width: 80%;
   display: table;
 }
 
-/* line 211, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 215, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 #rhythm-form {
   width: 50px;
   display: inline-flex;
@@ -9996,13 +10001,13 @@ button {
   border-radius: 8px;
 }
 
-/* line 219, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 223, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .rhythm-row {
   width: 80%;
   display: table-row;
 }
 
-/* line 227, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 231, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-checkbox {
   list-style: none;
   background-color: #fdd4f6;
@@ -10014,13 +10019,13 @@ button {
   color: black;
 }
 
-/* line 238, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 242, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-container {
   list-style: none;
   display: inline-block;
 }
 
-/* line 243, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
+/* line 247, /Users/mostlytoes/challenges/breakable_toy/within_finite/app/assets/stylesheets/sections.scss */
 .note-cell {
   list-style: none;
   border: 1px solid black;
