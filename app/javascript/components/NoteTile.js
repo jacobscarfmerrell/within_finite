@@ -11,7 +11,7 @@ const NoteTile = props => {
     )
   })
   return(
-    <div>
+    <div className="partial-sliders-container">
       {partialsSliders}
     </div>
   )

@@ -6,6 +6,18 @@ body {
   background-color: #ecfbfe;
 }
 
+h3 {
+  letter-spacing: 1.3px;
+  font-size: 24px;
+  line-height: 40px;
+  border-left: 3px solid lightblue;
+  border-radius: 5px;
+  margin-left: 0.5em;
+  padding-left: 0.25em;
+  align-items: center;
+  width: 20%;
+}
+
 input[type=range].partial-sliders {
   -webkit-appearance: none;
   width: 100%;
@@ -97,7 +109,8 @@ input[type=range].partial-sliders:focus::-ms-fill-upper {
   margin-left: 40px;
   font-family: garamond, serif;
   background-color: #ecfbfe;
-  font-size: 1.39em;
+  font-size: 1.9em;
+  text-shadow: 1px 1px 0 #ecfbfe, 1.4px 1.4px 0 #000000;
 }
 
 #app {
@@ -150,9 +163,12 @@ hr {
   border-color: darken(purple, 4%);
   border-style: outset;
   border-width: 2px;
-  margin-top: 5px;
   border-radius: 5px;
   padding: 0.5em;
+  width: 95%;
+  margin: 0 auto;
+  vertical-align: middle;
+  text-align: center;
 }
 
 #switch-1-icon {
@@ -199,17 +215,19 @@ button {
 }
 
 .section-container {
-  display: table-row;
+  display: inline-flex;
   list-style: none;
 }
 
 .section-row {
-  display: table-cell;
+  display: table-row;
 }
 
 .rhythm-container {
-  width: 80%;
   display: table;
+  max-width: 60%;
+  text-align: left;
+  vertical-align: left;
 }
 
 #rhythm-form {
@@ -221,7 +239,6 @@ button {
 }
 
 .rhythm-row {
-  width: 80%;
   display: table-row;
 }
 
@@ -233,10 +250,11 @@ button {
   background-color: #fdd4f6;
   border: none;
   border-radius: 180px;
-  padding: 20px;
+  padding: 0px 12px;
   margin: 5px;
   font-family: garamond, serif;
   color: black;
+  font-weight: bold;
 }
 
 .note-checkbox-0,.note-checkbox-12 {
@@ -263,4 +281,11 @@ button {
 .note-cell {
   list-style: none;
   border: 1px solid black;
+  transform: translateX(38.2%);
+}
+
+.partial-sliders-container {
+  padding: 1.8em;
+  text-align: center;
+  vertical-align: center;
 }
